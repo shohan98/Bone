@@ -24,3 +24,8 @@ def signup(request):
         form = SignUpForm()
     context = {'form': form, 'message':message}
     return render(request, 'reg.html', context)
+
+
+def admin_login(request):
+    return render(request, 'login.html')
+
