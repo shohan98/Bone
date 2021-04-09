@@ -519,6 +519,31 @@ button:focus {
     min-height: 370px;
 }
 
+.modal-form input {
+    border: 1px solid #3CC13B;
+}
+
+.modal-form label {
+    color: #3CC13B;
+}
+
+.modal-form .btn {
+    background-color: #3CC13B;
+    border-color: #3CC13B;
+}
+
+.login-modal .modal-header {
+    border-bottom: none;
+}
+
+.signup-modal .modal-header {
+    border-bottom: none;
+}
+
+.modal .modal-body {
+    padding: 30px;
+}
+
 @media (max-width: 1439.98px) {
     .left-ad-section {
         display: none;
