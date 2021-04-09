@@ -22,12 +22,11 @@
 </head>
 
 <body>
-    {% csrf_token %}
     <div class="container-fluid mglr-0">
         <strong>{{message}}</strong>
         <div class="login_form_section">
             <div class="login_options col-sm-5">
-                <form method="post" action="{% url 'rekognition:admin_user_login' %}">
+                <form method="POST" action="{% url 'boneadmin:signup' %}">
                 {% csrf_token %}
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -36,12 +35,27 @@
                         <input type="text" class="form-control login_input_field" placeholder="username" name="username">
                     </div>
 
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text login_input_addon"><i class="fa fa-envelope"></i></span>
+                        </div>
+                        <input type="email" class="form-control login_input_field" placeholder="email" name="email">
+                    </div>
+
 
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text login_input_addon"><i class="fa fa-key key_rotate"></i></span>
                         </div>
-                        <input type="password" class="form-control login_input_field" placeholder="Password" name="password">
+                        <input type="password" class="form-control login_input_field" placeholder="Password" name="password1">
+
+                        <i class="fa fa-eye show_pass"></i>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text login_input_addon"><i class="fa fa-key key_rotate"></i></span>
+                        </div>
+                        <input type="password" class="form-control login_input_field" placeholder="Condfirm Password" name="password2">
 
                         <i class="fa fa-eye show_pass"></i>
                     </div>
