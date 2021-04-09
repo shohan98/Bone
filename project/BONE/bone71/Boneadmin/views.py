@@ -29,3 +29,25 @@ def signup(request):
 def admin_login(request):
     return render(request, 'login.html')
 
+
+def admin_dashboard(request):
+    return render(request, 'dashboard.html')
+
+
+def admin_bannerad(request):
+    return render(request, 'banner_ad.html')
+
+
+def admin_motionad(request):
+    return render(request, 'motion_ad.html')
+
+
+def admin_videoad(request):
+    return render(request, 'video_ad.html')
+
+
+def admin_video_category(request):
+    return render(request, 'video_category.html')
+
+def admin_youtube(request):
+    return render(request, 'youtube.html')

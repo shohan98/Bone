@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,11 +10,11 @@
     <meta name="author" content="">
     <title>Bone - Dashboard</title>
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="{% static 'boneadmin/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="https://cdn.materialdesignicons.com/5.3.45/css/materialdesignicons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <!-- Custom styles for this template-->
-    <link href="css/bone.css" rel="stylesheet">
+    <link href="{% static 'boneadmin/css/bone.css' %}" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -24,7 +25,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center " href="dashboard.html">
                 <div class="sidebar-brand-icon">
-                    <img src="img/Logo.png">
+                    <img src="{% static 'boneadmin/img/Logo.png' %}">
                 </div>
             </a>
             <!-- Divider -->
@@ -40,31 +41,31 @@
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="video_category.html">
-                    <img src="img/video_cat.png" alt="">
+                    <img src="{% static 'boneadmin/img/video_cat.png' %}" alt="">
                     <span>Video Category</span> <span class="active_arrow"><i class="fas fa-chevron-right"></i></span></a>
             </li>
             <!-- Nav Item - Tables -->
             <li class="nav-item ">
                 <a class="nav-link" href="youtube.html">
-                    <img src="img/youtube.png" alt="">
+                    <img src="{% static 'boneadmin/img/youtube.png' %}" alt="">
                     <span>Youtube</span> <span class="active_arrow"><i class="fas fa-chevron-right"></i></span></a>
             </li>
             <!-- Nav Item - Tables -->
             <li class="nav-item ">
                 <a class="nav-link" href="banner_ad.html">
-                    <img src="img/banner.png" alt="">
+                    <img src="{% static 'boneadmin/img/banner.png' %}" alt="">
                     <span>Banner Ad</span> <span class="active_arrow"><i class="fas fa-chevron-right"></i></span></a>
             </li>
             <!-- Nav Item - Tables -->
             <li class="nav-item ">
                 <a class="nav-link" href="video_ad.html">
-                    <img src="img/video_ad.png" alt="">
+                    <img src="{% static 'boneadmin/img/video_ad.png' %}" alt="">
                     <span>Video Ad</span> <span class="active_arrow"><i class="fas fa-chevron-right"></i></span></a>
             </li>
             <!-- Nav Item - Tables -->
             <li class="nav-item active">
                 <a class="nav-link" href="motion_ad.html">
-                    <img src="img/motion.png" alt="">
+                    <img src="{% static 'boneadmin/img/motion.png' %}" alt="">
                     <span>Motion Ad</span> <span class="active_arrow"><i class="fas fa-chevron-right"></i></span></a>
             </li>
             <!-- Nav Item - Tables -->
@@ -107,7 +108,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small pl-2">Admin</span>
-                                <img class="img-profile rounded-circle" src="img/mdi-account-circle.png">
+                                <img class="img-profile rounded-circle" src="{% static 'boneadmin/img/mdi-account-circle.png' %}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -127,7 +128,7 @@
                             </div>
                         </li>
                         <li class="nav-item ">
-                            <a href="#" class="nav-link"><img src="img/mdi-bell.png" alt=""></a>
+                            <a href="#" class="nav-link"><img src="{% static 'boneadmin/img/mdi-bell.png' %}" alt=""></a>
                         </li>
                     </ul>
                 </nav>
@@ -145,7 +146,7 @@
                             <h4 class="banner_list_heading"><span class="text-green">Motion Ad List</span>
                                 <div class="buttons">
                                     <a href="#" class="btn btn-success btn-new-video" data-toggle="modal" data-target="#add_motion_modal">Add Motion Ad</a>
-                                    <a href="#" class="btn btn-default btn-filter"> <img class="mr-3" src="img/filter_icon.png" alt=""> Filter List</a>
+                                    <a href="#" class="btn btn-default btn-filter"> <img class="mr-3" src="{% static 'boneadmin/img/filter_icon.png' %}" alt=""> Filter List</a>
                                 </div>
                             </h4>
                             <div class="banner-list mt-3">
@@ -156,9 +157,9 @@
                                                 <p class="text-green mb-0">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
                                             </td>
                                             <td class="video_action">
-                                                <a href="#" class="approve"><img src="img/approve.png" alt=""></a>
-                                                <a href="#" class="edit"><img src="img/edit_icon.png" alt=""></a>
-                                                <a href="#" class="delete_video"><img src="img/delete_icon.png" alt=""></a>
+                                                <a href="#" class="approve"><img src="{% static 'boneadmin/img/approve.png' %}" alt=""></a>
+                                                <a href="#" class="edit"><img src="{% static 'boneadmin/img/edit_icon.png' %}" alt=""></a>
+                                                <a href="#" class="delete_video"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -166,9 +167,9 @@
                                                 <p class="text-green mb-0">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
                                             </td>
                                             <td class="video_action">
-                                                <a href="#" class="approve"><img src="img/approve.png" alt=""></a>
-                                                <a href="#" class="edit"><img src="img/edit_icon.png" alt=""></a>
-                                                <a href="#" class="delete_video"><img src="img/delete_icon.png" alt=""></a>
+                                                <a href="#" class="approve"><img src="{% static 'boneadmin/img/approve.png' %}" alt=""></a>
+                                                <a href="#" class="edit"><img src="{% static 'boneadmin/img/edit_icon.png' %}" alt=""></a>
+                                                <a href="#" class="delete_video"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -241,11 +242,11 @@
     </div>
     <!-- video modal  -->
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{% static 'boneadmin/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'boneadmin/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
     <!-- Core plugin JavaScript-->
     <!-- Custom scripts for all pages-->
-    <script src="js/bone.js"></script>
+    <script src="{% static 'boneadmin/js/bone.js' %}"></script>
     <!-- Page level plugins -->
     </script>
 
