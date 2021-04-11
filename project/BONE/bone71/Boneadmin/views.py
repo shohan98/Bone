@@ -69,6 +69,9 @@ def admin_videoad(request):
 def admin_video_category(request):
     return render(request, 'video_category.html')
 
+def dashboard_base(request):
+    return render(request, 'dashboard_base.html')
+
 def admin_youtube(request):
     if request.method=='POST':
         pass

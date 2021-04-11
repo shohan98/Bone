@@ -5,7 +5,7 @@ from rest_framework.routers import DefaultRouter
 
 from .views import (signup, test, admin_login, admin_bannerad, admin_youtube,
                     admin_motionad, admin_video_category, admin_videoad,
-                    admin_dashboard)
+                    admin_dashboard,dashboard_base)
 
 app_name = 'boneadmin'
 
@@ -22,6 +22,7 @@ urlpatterns = [
   path('motionad', admin_motionad, name='motionad'),
   path('video_category', admin_video_category, name='login'),
   path('videoad', admin_videoad, name='login'),
+  path('dashboard_base', dashboard_base, name='dashboard_base'),
   
   
   path('api/', include(router.urls)),
