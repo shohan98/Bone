@@ -5,6 +5,9 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from .forms import AdminSignUpForm
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from .decorators import admin_required
 
 from .models import (YoutubeContent, ContentCategory, ContentClickMonthlyReport,
                      VerticalAdWatchMonthlyReport, VerticalBannerAd,
@@ -54,16 +57,21 @@ def admin_login(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
+            print(user.is_admin)
             if user is not None:
-                login(request, user)
-                return render(request, 'login.html', context={'form': AuthenticationForm(), 'message': 'Success!!'})
+                if user.is_admin:
+                    login(request, user)
+                    return redirect('boneadmin:dashboard')
+                else:
+                    return render(request, 'login.html', context={'form': AuthenticationForm(), 'message': 'This user is not an Admin!!'})
             else:
                 messages.error(request, "Invalid username or password")
         else:
             messages.error(request, "Invalid username or password")
     return render(request, 'login.html', context={'form': AuthenticationForm()})
 
-
+@login_required
+@admin_required
 def admin_dashboard(request):
     return render(request, 'dashboard.html')
 
