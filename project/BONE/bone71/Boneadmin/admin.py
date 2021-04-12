@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import (YoutubeContent, VideoAd, VideoAdWatchMonthlyReport,
                      HorizontalBannerAd, HorizontalAdWatchMonthlyReport,
                      VerticalBannerAd, VerticalAdWatchMonthlyReport,
-                     ContentCategory, ContentClickMonthlyReport, User)
+                     ContentCategory, ContentClickMonthlyReport, User, Admin)
 
 # Register your models here.
 
@@ -52,6 +52,7 @@ class ContentClickMonthlyReportAdmin(admin.ModelAdmin):
     search_fields = ['content', 'report_date']
 
 admin.site.register(User, UserAdmin)
+admin.site.register(Admin)
 admin.site.register(YoutubeContent, YoutubeContentAdmin)
 admin.site.register(VideoAd, VideoAdAdmin)
 admin.site.register(VideoAdWatchMonthlyReport, VideoAdWatchMonthlyReportAdmin)

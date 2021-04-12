@@ -1,8 +1,10 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
-from .forms import SignUpForm
+from .forms import AdminSignUpForm
+from django.contrib.auth.forms import AuthenticationForm
 
 from .models import (YoutubeContent, ContentCategory, ContentClickMonthlyReport,
                      VerticalAdWatchMonthlyReport, VerticalBannerAd,
@@ -20,26 +22,24 @@ class test(ViewSet):
         return Response({'ok':'ok'})
 
 
+def csrf_failure(request, reason=""):
+    current_url = request.get_full_path()
+    return redirect(current_url)
+
+
+
 def signup(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        p = request.POST.get('password1')
-        c_p = request.POST.get('password2')
-        if p==c_p:
-            user = User.objects.create(username=username, email=email, password=p,
-                                       is_user=True)
-            user.save()
-            message = 'Success'
-#        form = SignUpForm(request.POST)
-#        if form.is_valid():
-#            form.is_user=True
-#            form.save()
+        form = AdminSignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
 #            username = form.cleaned_data.get('username')
 #            raw_password = form.cleaned_data.get('password1')
 #            user = authenticate(username=username, password=raw_password)
 #            login(request, user)
-#            message = 'Register Successfully'
+            message = 'Register Successfully'
+        else:
+            message = str(form.errors)
     else:
         message = 'Here is your registration form'
     context = { 'message':message}
@@ -47,7 +47,20 @@ def signup(request):
 
 
 def admin_login(request):
-    return render(request, 'login.html')
+    if request.method=='POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None :
+                login(request,user)
+                return render(request, 'login.html',context={'form':AuthenticationForm(), 'message':'Success!!'})
+            else:
+                messages.error(request,"Invalid username or password")
+        else:
+                messages.error(request,"Invalid username or password")
+    return render(request, 'login.html',context={'form':AuthenticationForm()})
 
 
 def admin_dashboard(request):
@@ -60,6 +73,8 @@ def admin_bannerad(request):
 
 def admin_motionad(request):
     return render(request, 'motion_ad.html')
+
+
 
 
 def admin_videoad(request):

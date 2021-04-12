@@ -20,8 +20,8 @@ urlpatterns = [
   path('bannerad', admin_bannerad, name='bannerad'),
   path('youtube', admin_youtube, name='youtube'),
   path('motionad', admin_motionad, name='motionad'),
-  path('video_category', admin_video_category, name='login'),
-  path('videoad', admin_videoad, name='login'),
+  path('video_category', admin_video_category, name='video_category'),
+  path('videoad', admin_videoad, name='videoad'),
   path('dashboard_base', dashboard_base, name='dashboard_base'),
   
   
