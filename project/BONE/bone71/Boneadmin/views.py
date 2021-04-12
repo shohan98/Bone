@@ -12,14 +12,16 @@ from .models import (YoutubeContent, ContentCategory, ContentClickMonthlyReport,
                      VideoAd, VideoAdWatchMonthlyReport, User)
 
 from .serializers import (YoutubeContentSerializer, ContentCategorySerializer,
-                          ContentClickMonthlyReportSerializer, 
-                          VerticalAdWatchMonthlyReportSerializer, 
+                          ContentClickMonthlyReportSerializer,
+                          VerticalAdWatchMonthlyReportSerializer,
                           VerticalBannerAdSerializer, VideoAdWatchMonthlyReportSerializer,
                           VideoAdSerializer, HorizontalAdWatchMonthlyReportSerializer,
                           HorizontalBannerAdSerializer)
+
+
 class test(ViewSet):
     def list(self, request):
-        return Response({'ok':'ok'})
+        return Response({'ok': 'ok'})
 
 
 def csrf_failure(request, reason=""):
@@ -27,40 +29,39 @@ def csrf_failure(request, reason=""):
     return redirect(current_url)
 
 
-
 def signup(request):
     if request.method == 'POST':
         form = AdminSignUpForm(request.POST)
         if form.is_valid():
             form.save()
-#            username = form.cleaned_data.get('username')
-#            raw_password = form.cleaned_data.get('password1')
-#            user = authenticate(username=username, password=raw_password)
-#            login(request, user)
+            #            username = form.cleaned_data.get('username')
+            #            raw_password = form.cleaned_data.get('password1')
+            #            user = authenticate(username=username, password=raw_password)
+            #            login(request, user)
             message = 'Register Successfully'
         else:
             message = str(form.errors)
     else:
         message = 'Here is your registration form'
-    context = { 'message':message}
+    context = {'message': message}
     return render(request, 'reg.html', context)
 
 
 def admin_login(request):
-    if request.method=='POST':
+    if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            if user is not None :
-                login(request,user)
-                return render(request, 'login.html',context={'form':AuthenticationForm(), 'message':'Success!!'})
+            if user is not None:
+                login(request, user)
+                return render(request, 'login.html', context={'form': AuthenticationForm(), 'message': 'Success!!'})
             else:
-                messages.error(request,"Invalid username or password")
+                messages.error(request, "Invalid username or password")
         else:
-                messages.error(request,"Invalid username or password")
-    return render(request, 'login.html',context={'form':AuthenticationForm()})
+            messages.error(request, "Invalid username or password")
+    return render(request, 'login.html', context={'form': AuthenticationForm()})
 
 
 def admin_dashboard(request):
@@ -75,8 +76,6 @@ def admin_motionad(request):
     return render(request, 'motion_ad.html')
 
 
-
-
 def admin_videoad(request):
     return render(request, 'video_ad.html')
 
@@ -84,14 +83,16 @@ def admin_videoad(request):
 def admin_video_category(request):
     return render(request, 'video_category.html')
 
+
 def dashboard_base(request):
     return render(request, 'dashboard_base.html')
 
+
 def admin_youtube(request):
-    if request.method=='POST':
+    if request.method == 'POST':
         pass
     else:
         videos = YoutubeContent.objects.all()
         videos = YoutubeContentSerializer(videos, many=True)
-        
+
     return render(request, 'youtube.html')
