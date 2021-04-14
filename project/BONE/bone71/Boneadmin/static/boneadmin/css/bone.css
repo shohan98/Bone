@@ -12201,3 +12201,15 @@ body.sidebar-toggled footer.sticky-footer {
 #add_banner_modal select {
     border: 1px solid #47B881;
 }
+
+.video_image {
+    width: 130px;
+}
+
+.video_name {
+    width: 60%;
+}
+
+.video_image img {
+    width: 100%;
+}

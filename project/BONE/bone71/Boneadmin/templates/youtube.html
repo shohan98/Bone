@@ -1,5 +1,4 @@
-{% extends "dashboard_base.html" %} {% block content %}
-{% load static %}
+{% extends "dashboard_base.html" %} {% block content %} {% load static %}
 <!-- Begin Page Content -->
 <div class="container-fluid dashboard_item">
     <!-- Page Heading -->
@@ -19,8 +18,8 @@
             <div class="video-list mt-3">
                 <table class="table table-borderless">
                     <tbody>
-                    {% for i in data %}
-                        
+                        {% for i in data %}
+
                         <tr>
                             <td class="video_image">
                                 <img src="{{i.content_poster}}" alt="">
@@ -37,13 +36,42 @@
                                 <a href="#" class="delete_video"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
                             </td>
                         </tr>
-                    {% endfor %}    
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
     <!-- Content Row -->
+</div>
+
+<!-- Modal -->
+<div class="modal fade add_video_modal" id="add_video_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-green" id="exampleModalCenterTitle">Add Video</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="text-green" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="youtube_link">Drop Youtube Link</label>
+                        <input type="text" class="form-control" id="youtube_link" aria-describedby="emailHelp" placeholder="Past youtube link here...">
+                    </div>
+                    <div class="form-group">
+                        <label for="Category">Category</label>
+                        <input type="text" class="form-control" id="Category" placeholder="Select Category">
+                    </div>
+                    <button type="button" class="btn btn-success submit-btn mr-2" data-dismiss="modal">Submit</button>
+                    <button type="button" class="btn btn-default cancle-btn" data-dismiss="modal">Cancel</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
 </div>
 <!-- /.container-fluid -->
 {% endblock %}
