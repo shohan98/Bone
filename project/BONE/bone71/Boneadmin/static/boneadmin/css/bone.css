@@ -12203,6 +12203,7 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 .video_image {
+    min-width: 10%;
     width: 130px;
 }
 
@@ -12212,4 +12213,26 @@ body.sidebar-toggled footer.sticky-footer {
 
 .video_image img {
     width: 100%;
+}
+
+.video_cateogry {
+    width: 20%;
+}
+
+.video_action {
+    width: 10%;
+}
+
+.ad_image {
+    width: 130px;
+}
+
+.ad_image img,
+.ad_image video {
+    max-width: 100%;
+}
+
+.table tr,
+.table td {
+    padding: 0 auto;
 }
