@@ -19,38 +19,25 @@
             <div class="video-list mt-3">
                 <table class="table table-borderless">
                     <tbody>
+                    {% for i in data %}
+                        
                         <tr>
                             <td class="video_image">
-                                <img src="{% static 'boneadmin/img/vlist-img.png' %}" alt="">
+                                <img src="{{i.content_poster}}" alt="">
                             </td>
                             <td class="video_name">
-                                <p>Golmorich | গোলমরিচ | Valentines Drama | Afran Nisho | Mehazabien | Rubel Hasan | Bangla Natok 2021
+                                <p>{{i.content_name}}
                                 </p>
                             </td>
-                            <td class="video_type">
-                                <p>Action</p>
+                            <td class="video_cateogry">
+                                <p>{{i.category}}</p>
                             </td>
                             <td class="video_action">
                                 <a href="#" class="edit"><img src="{% static 'boneadmin/img/edit_icon.png' %}" alt=""></a>
                                 <a href="#" class="delete_video"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
                             </td>
                         </tr>
-                        <tr>
-                            <td class="video_image">
-                                <img src="{% static 'boneadmin/img/vlist-img.png' %}" alt="">
-                            </td>
-                            <td class="video_name">
-                                <p>Golmorich | গোলমরিচ | Valentines Drama | Afran Nisho | Mehazabien | Rubel Hasan | Bangla Natok 2021
-                                </p>
-                            </td>
-                            <td class="video_type">
-                                <p>Action</p>
-                            </td>
-                            <td class="video_action">
-                                <a href="#" class="edit"><img src="{% static 'boneadmin/img/edit_icon.png' %}" alt=""></a>
-                                <a href="#" class="delete_video"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
-                            </td>
-                        </tr>
+                    {% endfor %}    
                     </tbody>
                 </table>
             </div>

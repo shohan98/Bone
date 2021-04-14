@@ -8,6 +8,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .decorators import admin_required
+from django.conf import settings
 
 from .models import (YoutubeContent, ContentCategory, ContentClickMonthlyReport,
                      VerticalAdWatchMonthlyReport, VerticalBannerAd,
@@ -73,34 +74,69 @@ def admin_login(request):
 @login_required
 @admin_required
 def admin_dashboard(request):
-    return render(request, 'dashboard.html')
+    context = {'dashboard':'active'}
+    return render(request, 'dashboard.html', context)
 
 
 def admin_bannerad(request):
-    return render(request, 'banner_ad.html')
+    data=[]
+    if request.method == 'POST':
+        pass
+    else:
+        videos = HorizontalBannerAd.objects.all()
+#        videos = YoutubeContentSerializer(videos, many=True)
+        hbanner_list = []
+        for i in videos:
+            hbanner_list.append({
+                        'id': i.id,
+                        'banner_name': i.content_name,
+                        'banner': settings.MEDIA_URL+str(i.banner),
+                        'postion': i.position,
+                        'status': i.status
+                    })
+        data = hbanner_list
+    context = {'bannerad':'active', 'data':data}
+    return render(request, 'banner_ad.html', context)
 
 
 def admin_motionad(request):
-    return render(request, 'motion_ad.html')
+    context = {'motionad':'active'}
+    return render(request, 'motion_ad.html', context)
 
 
 def admin_videoad(request):
-    return render(request, 'video_ad.html')
+    context = {'videoad':'active'}
+    return render(request, 'video_ad.html', context)
 
 
 def admin_video_category(request):
-    return render(request, 'video_category.html')
+    context = {'video_category':'active'}
+    return render(request, 'video_category.html', context)
 
 
 def dashboard_base(request):
+    
     return render(request, 'dashboard_base.html')
 
 
 def admin_youtube(request):
+    data=[]
     if request.method == 'POST':
         pass
     else:
         videos = YoutubeContent.objects.all()
-        videos = YoutubeContentSerializer(videos, many=True)
-
-    return render(request, 'youtube.html')
+#        videos = YoutubeContentSerializer(videos, many=True)
+        video_list = []
+        for i in videos:
+            video_list.append({
+                        'id': i.id,
+                        'content_name': i.content_name,
+                        'content_link': i.content_link,
+                        'category': i.category.category_name,
+                        'content_poster': settings.MEDIA_URL+str(i.content_poster)
+                    })
+        data = video_list
+#        for i in videos.data:
+            
+    context = {'youtube':'active', 'data':data}
+    return render(request, 'youtube.html', context)

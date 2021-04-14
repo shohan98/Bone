@@ -31,6 +31,7 @@ class ContentCategory(models.Model):
 
 class YoutubeContent(models.Model):
     content_name = models.CharField(max_length=600)
+    content_poster = models.ImageField(upload_to='Poster' ,blank=True)
     category = models.ForeignKey(ContentCategory, on_delete=models.CASCADE)
     content_link = models.URLField()
     total_click = models.IntegerField(default=0)
@@ -56,7 +57,7 @@ class VideoAd(models.Model):
 
 class VerticalBannerAd(models.Model):
     banner_name = models.CharField(max_length=300)
-    banner = models.FileField()
+    banner = models.FileField(upload_to='HBanner')
     target_link = models.URLField(null=True)
     total_watch = models.IntegerField(default=0)
     status = models.BooleanField(default=True)
