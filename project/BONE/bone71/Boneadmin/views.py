@@ -77,7 +77,8 @@ def admin_dashboard(request):
     context = {'dashboard':'active'}
     return render(request, 'dashboard.html', context)
 
-
+@login_required
+@admin_required
 def admin_bannerad(request):
     data=[]
     if request.method == 'POST':
@@ -89,7 +90,7 @@ def admin_bannerad(request):
         for i in videos:
             hbanner_list.append({
                         'id': i.id,
-                        'banner_name': i.content_name,
+                        'banner_name': i.banner_name,
                         'banner': settings.MEDIA_URL+str(i.banner),
                         'postion': i.position,
                         'status': i.status
@@ -98,27 +99,64 @@ def admin_bannerad(request):
     context = {'bannerad':'active', 'data':data}
     return render(request, 'banner_ad.html', context)
 
-
+@login_required
+@admin_required
 def admin_motionad(request):
-    context = {'motionad':'active'}
+    data=[]
+    if request.method == 'POST':
+        pass
+    else:
+        videos = VerticalBannerAd.objects.all()
+#        videos = YoutubeContentSerializer(videos, many=True)
+        Vbanner_list = []
+        for i in videos:
+            Vbanner_list.append({
+                        'id': i.id,
+                        'banner_name': i.banner_name,
+                        'banner': settings.MEDIA_URL+str(i.banner),
+                        'postion': i.position,
+                        'status': i.status
+                    })
+        data = Vbanner_list
+    context = {'motionad':'active', 'data':data}
     return render(request, 'motion_ad.html', context)
 
-
+@login_required
+@admin_required
 def admin_videoad(request):
     context = {'videoad':'active'}
     return render(request, 'video_ad.html', context)
 
-
+@login_required
+@admin_required
 def admin_video_category(request):
-    context = {'video_category':'active'}
+    data=[]
+    if request.method == 'POST':
+        pass
+    else:
+        videos = VerticalBannerAd.objects.all()
+#        videos = YoutubeContentSerializer(videos, many=True)
+        Videoad_list = []
+        for i in videos:
+            Videoad_list.append({
+                        'id': i.id,
+                        'banner_name': i.video_name,
+                        'banner': settings.MEDIA_URL+str(i.banner),
+                        'toatal_watch': i.total_watch,
+                        'status': i.status
+                    })
+        data = Videoad_list
+    context = {'video_category':'active', 'data':data}
     return render(request, 'video_category.html', context)
 
-
+@login_required
+@admin_required
 def dashboard_base(request):
     
     return render(request, 'dashboard_base.html')
 
-
+@login_required
+@admin_required
 def admin_youtube(request):
     data=[]
     if request.method == 'POST':
