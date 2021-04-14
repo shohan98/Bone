@@ -12198,7 +12198,9 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 #add_banner_modal .custom-file-label,
-#add_banner_modal select {
+#add_banner_modal select,
+#add_video_modal select,
+#add_video_modal .custom-file-label {
     border: 1px solid #47B881;
 }
 

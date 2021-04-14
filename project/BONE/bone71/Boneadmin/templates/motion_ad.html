@@ -9,31 +9,31 @@
     <!-- Content Row -->
     <div class="row">
         <div class="col-12 banner_list">
-            <h4 class="banner_list_heading"><span class="text-green">Motion Ad List</span>
+            <h4 class="banner_list_heading"><span class="text-green">Motion Ad</span>
                 <div class="buttons">
-                    <a href="#" class="btn btn-success btn-new-video" data-toggle="modal" data-target="#add_motion_modal">Add Motion Ad</a>
+                    <a href="#" class="btn btn-success btn-new-video" data-toggle="modal" data-target="#add_banner_modal">Add New banner</a>
                     <a href="#" class="btn btn-default btn-filter"> <img class="mr-3" src="{% static 'boneadmin/img/filter_icon.png' %}" alt=""> Filter List</a>
                 </div>
             </h4>
             <div class="banner-list mt-3">
                 <table class="table table-borderless">
+                    <tr>
+                        <th class="ad_image">Thumbnail</th>
+                        <th class="ad_name">Ad Type</th>
+                        <th class="video_action">Action</th>
+                    </tr>
                     <tbody>
                         <tr>
-                            <td class="">
-                                <p class="text-green mb-0">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                            <td class="ad_image">
+                                <div>
+                                    <img src="{% static 'boneadmin/img/horizontal_ad.png' %}" alt="">
+                                </div>
+                            </td>
+                            <td class="ad_name">
+                                <p class="mb-0">Banner 1</p>
+                                <p class="ad_position mb-0">horizontal | left</p>
                             </td>
                             <td class="video_action">
-                                <a href="#" class="approve"><img src="{% static 'boneadmin/img/approve.png' %}" alt=""></a>
-                                <a href="#" class="edit"><img src="{% static 'boneadmin/img/edit_icon.png' %}" alt=""></a>
-                                <a href="#" class="delete_video"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="">
-                                <p class="text-green mb-0">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
-                            </td>
-                            <td class="video_action">
-                                <a href="#" class="approve"><img src="{% static 'boneadmin/img/approve.png' %}" alt=""></a>
                                 <a href="#" class="edit"><img src="{% static 'boneadmin/img/edit_icon.png' %}" alt=""></a>
                                 <a href="#" class="delete_video"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
                             </td>
@@ -47,11 +47,12 @@
 </div>
 <!-- /.container-fluid -->
 <!-- Modal -->
-<div class="modal fade add_video_modal" id="add_motion_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- modal/ -->
+<div class="modal fade add_video_modal" id="add_banner_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-green" id="exampleModalCenterTitle">Add Motion Ad </h4>
+                <h4 class="modal-title text-green" id="exampleModalCenterTitle">Add Banner</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span class="text-green" aria-hidden="true">&times;</span>
                 </button>
@@ -59,13 +60,20 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="customFile">Video Upload</label>
+                        <label for="customFile">Image Upload</label>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="customFile">
                             <label class="custom-file-label" for="customFile">Choose file</label>
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label for="banner_name">Banner Name</label>
+                        <input type="text" class="form-control" name="" id="banner_name" placeholder="Banner Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="target_url">Target URL</label>
+                        <input type="text" class="form-control" id="target_url" aria-describedby="emailHelp" placeholder="Video Name">
+                    </div>
                     <button type="button" class="btn btn-success submit-btn mr-2" data-dismiss="modal">Submit</button>
                     <button type="button" class="btn btn-default cancle-btn" data-dismiss="modal">Cancel</button>
                 </form>
