@@ -80,15 +80,6 @@ $(document).ready(function() {
         }
     });
 
-    // Go to the next item
-    $('.slider_nav_Latest .customNextBtn').click(function() {
-        $('#latest_slider .owl-next').click();
-    });
-    // Go to the previous item
-    $('.slider_nav_Latest .customPrevBtn').click(function() {
-        $('#latest_slider .owl-prev').click();
-    });
-
 
     // slider_nav_movie 
 
@@ -111,14 +102,6 @@ $(document).ready(function() {
         }
     });
 
-    // Go to the next item
-    $('.slider_nav_movie .customNextBtn').click(function() {
-        $('#movie_slider .owl-next').click();
-    });
-    // Go to the previous item
-    $('.slider_nav_movie .customPrevBtn').click(function() {
-        $('#movie_slider .owl-prev').click();
-    });
 
 
     // top regional
@@ -142,14 +125,6 @@ $(document).ready(function() {
         }
     });
 
-    // Go to the next item
-    $('.slider_nav_Topr .customNextBtn').click(function() {
-        $('#Top_Regeional_slider .owl-next').click();
-    });
-    // Go to the previous item
-    $('.slider_nav_Topr .customPrevBtn').click(function() {
-        $('#Top_Regeional_slider .owl-prev').click();
-    });
 
     // most action
 
@@ -172,14 +147,6 @@ $(document).ready(function() {
         }
     });
 
-    // Go to the next item
-    $('.slider_nav_m_action .customNextBtn').click(function() {
-        $('#most_action_slider .owl-next').click();
-    });
-    // Go to the previous item
-    $('.slider_nav_m_action .customPrevBtn').click(function() {
-        $('#most_action_slider .owl-prev').click();
-    });
 
     // most popular
     $('.most_popular_slider').owlCarousel({
@@ -201,14 +168,7 @@ $(document).ready(function() {
         }
     });
 
-    // Go to the next item
-    $('.slider_nav_m_popular .customNextBtn').click(function() {
-        $('#most_popular_slider .owl-next').click();
-    });
-    // Go to the previous item
-    $('.slider_nav_m_popular .customPrevBtn').click(function() {
-        $('#most_popular_slider .owl-prev').click();
-    });
+
 
     // most viewed
     $('.most_viewed_slider').owlCarousel({
@@ -230,14 +190,19 @@ $(document).ready(function() {
         }
     });
 
-    // Go to the next item
-    $('.slider_nav_m_viewed .customNextBtn').click(function() {
-        $('#most_viewed_slider .owl-next').click();
+
+    $('.customNextBtn').click(function() {
+        $(this).closest('.slider_nav_arrow').siblings('.owl-carousel').children('.owl-nav').find('.owl-next').click()
     });
-    // Go to the previous item
-    $('.slider_nav_m_viewed .customPrevBtn').click(function() {
-        $('#most_viewed_slider .owl-prev').click();
+    $('.customPrevBtn').click(function() {
+        $(this).closest('.slider_nav_arrow').siblings('.owl-carousel').children('.owl-nav').find('.owl-prev').click()
     });
 
+
+    // show icons 
+    // $('.c_sldier .owl-item').hover(function() {
+    //     $('.movie_play_icon').slideToggle(200);
+    // });
+    // show icons 
 
 });
