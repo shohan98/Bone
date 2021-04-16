@@ -6,24 +6,23 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
     </div>
     <!-- Content Row -->
+    {{message}}
     <div class="row">
         <div class="col-12">
             <h4 class="text-green">Video Category</h4>
             <div class="tag-section">
-                <span class="tags-span">Action 1 <span class="tag-close-icon"><i class="fas fa-times"></i></span></span>
-                <span class="tags-span">Action 2<span class="tag-close-icon"><i class="fas fa-times"></i></span></span>
-                <span class="tags-span">Action 3<span class="tag-close-icon"><i class="fas fa-times"></i></span></span>
-                <span class="tags-span">Action 4<span class="tag-close-icon"><i class="fas fa-times"></i></span></span>
-                <span class="tags-span">Action 5<span class="tag-close-icon"><i class="fas fa-times"></i></span></span>
-                <span class="tags-span">Action 6<span class="tag-close-icon"><i class="fas fa-times"></i></span></span>
+                {% for i in data %}
+                    <span class="tags-span" >{{i.category_name}} <span class="tag-close-icon"><i class="fas fa-times"></i></span></span>
+                {% endfor %}                
             </div>
         </div>
         <div class="col-12">
             <h4 class="text-green mt-2 mb-4">Add New Category</h4>
-            <div class="new_category_section">
-                <input type="text" class="form-control add-category-input" name="" id="" placeholder="Add New Category">
-                <button class="btn btn-success btn-add-category" onclick="addCategory()">Add</button>
-            </div>
+            <form method="POST" action={% url 'boneadmin:video_category' %}>
+                {% csrf_token %}
+                <input type="text" class="form-control add-category-input" name="video_category" id="" placeholder="Add New Category">
+                <button type="submit" class="btn btn-success btn-add-category">Add</button>
+            </form>
         </div>
 
     </div>

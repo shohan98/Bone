@@ -9,6 +9,7 @@
     <!-- Content Row -->
     <div class="row">
         <div class="col-12 video_list">
+        {{message}}
             <h4 class="video_list_heading"><span class="text-green">Youtube Video List</span>
                 <div class="buttons">
                     <a href="#" class="btn btn-success btn-new-video" data-toggle="modal" data-target="#add_video_modal">Add New Video</a>
@@ -62,27 +63,33 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action={% url 'boneadmin:youtube' %} enctype="multipart/form-data">
+                {% csrf_token %}
                     <div class="form-group">
                         <label for="youtube_link">Drop Youtube Link</label>
-                        <input type="text" class="form-control" id="youtube_link" aria-describedby="emailHelp" placeholder="Past youtube link here...">
+                        <input type="text" class="form-control" id="youtube_link" 
+                        aria-describedby="emailHelp" name="link" placeholder="Past youtube link here..."  required >
                     </div>
                     <div class="form-group">
                         <label for="Category">Category</label>
-                        <input type="text" class="form-control" id="Category" placeholder="Select Category">
+                        <select class="form-control" id="Category" name="video_category"  required >
+                        {% for i in category %}
+                            <option value="{{i.id}}">{{i.category_name}}</option>
+                        {% endfor %}
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Select Category">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Select Conetent Name"  required >
                     </div>
                     <div class="form-group">
                         <label for="thumbnail">Thumbnail</label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="thumbnail">
+                            <input class="custom-file-input" id="thumbnail" name="poster" type="file" required >
                             <label class="custom-file-label" for="customFile">Choose Thumbnail Image</label>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-success submit-btn mr-2" data-dismiss="modal">Submit</button>
+                    <button type="submit" class="btn btn-success submit-btn mr-2">Submit</button>
                     <button type="button" class="btn btn-default cancle-btn" data-dismiss="modal">Cancel</button>
                 </form>
 

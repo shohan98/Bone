@@ -7,11 +7,14 @@ from .views import (signup, test, admin_login, admin_bannerad, admin_youtube,
                     admin_motionad, admin_video_category, admin_videoad,
                     admin_dashboard,dashboard_base)
 
+from.views import (ContentDelete,)
 app_name = 'boneadmin'
 
 router = DefaultRouter()
 
 router.register('test', test, basename='test' )
+router.register('contentdelete', ContentDelete, basename='contentdelete' )
+
 
 urlpatterns = [
   path('signup', signup, name='signup'),

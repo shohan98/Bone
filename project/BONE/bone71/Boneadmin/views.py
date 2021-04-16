@@ -1,14 +1,15 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from rest_framework.response import Response
-from rest_framework.viewsets import ViewSet
+from rest_framework.viewsets import ViewSet, GenericViewSet
 from .forms import AdminSignUpForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .decorators import admin_required
 from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 
 from .models import (YoutubeContent, ContentCategory, ContentClickMonthlyReport,
                      VerticalAdWatchMonthlyReport, VerticalBannerAd,
@@ -26,6 +27,25 @@ from .serializers import (YoutubeContentSerializer, ContentCategorySerializer,
 class test(ViewSet):
     def list(self, request):
         return Response({'ok': 'ok'})
+
+
+class ContentDelete(ViewSet):
+    def post(self, request):
+        c_id = request.POST.get('c_id')
+        print(c_id)
+        print(request.POST)
+#        try:
+        data = YoutubeContent.objects.get(id=c_id)
+        data.delete()
+        message="Delete Successfully"
+        status = 204
+#        except:
+#            status=404
+#            message="Delete Failed"
+        return Response({'message':message}, status)
+    
+    def list(self, request):
+        return Response({'message':'Get method not allowed'}, 405)
 
 
 def csrf_failure(request, reason=""):
@@ -81,30 +101,63 @@ def admin_dashboard(request):
 @admin_required
 def admin_bannerad(request):
     data=[]
+    message=''
     if request.method == 'POST':
-        pass
-    else:
-        videos = HorizontalBannerAd.objects.all()
+        content_name = request.POST.get('name')
+        content_link = request.POST.get('link')
+        category = request.POST.get('video_category')
+        file = request.FILES['poster']
+        try:
+            try:
+                data = HorizontalBannerAd.objects.create(content_name=content_name, 
+                                 content_link=content_link, category=category,
+                                 content_poster=file)
+                data.save()
+                message = "Conent Uploaded Successfully."
+            except:
+                message = "File Uploaded Failed"
+        except:
+            message = "Please Select Valid Category"
+
+# Load all other elements
+    videos = HorizontalBannerAd.objects.all()
 #        videos = YoutubeContentSerializer(videos, many=True)
-        hbanner_list = []
-        for i in videos:
-            hbanner_list.append({
-                        'id': i.id,
-                        'banner_name': i.banner_name,
-                        'banner': settings.MEDIA_URL+str(i.banner),
-                        'postion': i.position,
-                        'status': i.status
-                    })
-        data = hbanner_list
-    context = {'bannerad':'active', 'data':data}
+    hbanner_list = []
+    for i in videos:
+        hbanner_list.append({
+                    'id': i.id,
+                    'banner_name': i.banner_name,
+                    'banner': settings.MEDIA_URL+str(i.banner),
+                    'postion': i.position,
+                    'status': i.status
+                })
+    data = hbanner_list
+    context = {'bannerad':'active', 'data':data, 'message':message}
     return render(request, 'banner_ad.html', context)
 
 @login_required
 @admin_required
 def admin_motionad(request):
     data=[]
+    message=''
     if request.method == 'POST':
-        pass
+        content_name = request.POST.get('name')
+        content_link = request.POST.get('link')
+        category = request.POST.get('video_category')
+        file = request.FILES['poster']
+        try:
+            category = ContentCategory.objects.get(id=category)
+            try:
+                data = YoutubeContent.objects.create(content_name=content_name, 
+                                 content_link=content_link, category=category,
+                                 content_poster=file)
+                data.save()
+                message = "Conent Uploaded Successfully."
+            except:
+                message = "File Uploaded Failed"
+        except:
+            message = "Please Select Valid Category"
+
     else:
         videos = VerticalBannerAd.objects.all()
 #        videos = YoutubeContentSerializer(videos, many=True)
@@ -131,22 +184,26 @@ def admin_videoad(request):
 @admin_required
 def admin_video_category(request):
     data=[]
+    message=""
     if request.method == 'POST':
-        pass
-    else:
-        videos = VerticalBannerAd.objects.all()
+        video_category = request.POST.get('video_category')
+        try:
+            category = ContentCategory.objects.create(category_name=video_category)
+            category.save()
+            message="Video Category Create Successfully"
+        except:
+            message="Video Category Create Failed."
+        
+    videos = ContentCategory.objects.all()
 #        videos = YoutubeContentSerializer(videos, many=True)
-        Videoad_list = []
-        for i in videos:
-            Videoad_list.append({
-                        'id': i.id,
-                        'banner_name': i.video_name,
-                        'banner': settings.MEDIA_URL+str(i.banner),
-                        'toatal_watch': i.total_watch,
-                        'status': i.status
-                    })
-        data = Videoad_list
-    context = {'video_category':'active', 'data':data}
+    Videoad_list = []
+    for i in videos:
+        Videoad_list.append({
+                    'id': i.id,
+                    'category_name': i.category_name
+                })
+    data = Videoad_list
+    context = {'video_category':'active', 'data':data, 'message':message}
     return render(request, 'video_category.html', context)
 
 @login_required
@@ -159,22 +216,47 @@ def dashboard_base(request):
 @admin_required
 def admin_youtube(request):
     data=[]
+    message=''
     if request.method == 'POST':
-        pass
-    else:
-        videos = YoutubeContent.objects.all()
+        content_name = request.POST.get('name')
+        content_link = request.POST.get('link')
+        category = request.POST.get('video_category')
+        file = request.FILES['poster']
+        try:
+            category = ContentCategory.objects.get(id=category)
+            try:
+                data = YoutubeContent.objects.create(content_name=content_name, 
+                                 content_link=content_link, category=category,
+                                 content_poster=file)
+                data.save()
+                message = "Conent Uploaded Successfully."
+            except:
+                message = "File Uploaded Failed"
+        except:
+            message = "Please Select Valid Category"
+
+# Load all other elements
+            
+    videos = YoutubeContent.objects.all().order_by('created_at').reverse()
+    category = ContentCategory.objects.all().order_by('created_at').reverse()
 #        videos = YoutubeContentSerializer(videos, many=True)
-        video_list = []
-        for i in videos:
-            video_list.append({
-                        'id': i.id,
-                        'content_name': i.content_name,
-                        'content_link': i.content_link,
-                        'category': i.category.category_name,
-                        'content_poster': settings.MEDIA_URL+str(i.content_poster)
-                    })
-        data = video_list
+    video_list = []
+    category_list = []
+    for i in videos:
+        video_list.append({
+                    'id': i.id,
+                    'content_name': i.content_name,
+                    'content_link': i.content_link,
+                    'category': i.category.category_name,
+                    'content_poster': settings.MEDIA_URL+str(i.content_poster)
+                })
+    for i in category:
+        category_list.append({
+                    'id': i.id,
+                    'category_name': i.category_name,
+                })
+    data = video_list
 #        for i in videos.data:
             
-    context = {'youtube':'active', 'data':data}
+    context = {'youtube':'active', 'data':data, 'message': message, 'category':category_list}
     return render(request, 'youtube.html', context)

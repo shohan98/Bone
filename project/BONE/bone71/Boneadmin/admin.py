@@ -13,7 +13,7 @@ class UserAdmin(admin.ModelAdmin):
 
 
 class YoutubeContentAdmin(admin.ModelAdmin):
-    list_display = ['content_name', 'category', 'total_click', 'status',
+    list_display = ['id', 'content_name', 'category', 'total_click', 'status',
                     'created_at']
     search_fields = ['content_name']
     list_filter = ('category',)

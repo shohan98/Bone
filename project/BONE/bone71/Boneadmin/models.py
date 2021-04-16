@@ -19,7 +19,7 @@ class Admin(models.Model):
 
 # Create your models here.
 class ContentCategory(models.Model):
-    category_name = models.CharField(max_length=60)
+    category_name = models.CharField(max_length=60, unique=True)
     total_video = models.IntegerField(default=0)
     total_click = models.IntegerField(default=0)
     added_by_ip = models.CharField(max_length=25)
@@ -33,7 +33,7 @@ class YoutubeContent(models.Model):
     content_name = models.CharField(max_length=600)
     content_poster = models.ImageField(upload_to='Poster' ,blank=True)
     category = models.ForeignKey(ContentCategory, on_delete=models.CASCADE)
-    content_link = models.URLField()
+    content_link = models.URLField(unique=True)
     total_click = models.IntegerField(default=0)
     status = models.BooleanField(default=True)
     added_by_ip = models.CharField(max_length=25)
@@ -57,7 +57,7 @@ class VideoAd(models.Model):
 
 class VerticalBannerAd(models.Model):
     banner_name = models.CharField(max_length=300)
-    banner = models.FileField(upload_to='HBanner')
+    banner = models.FileField(upload_to='VBanner')
     target_link = models.URLField(null=True)
     total_watch = models.IntegerField(default=0)
     status = models.BooleanField(default=True)
@@ -71,7 +71,7 @@ class VerticalBannerAd(models.Model):
 
 class HorizontalBannerAd(models.Model):
     banner_name = models.CharField(max_length=300)
-    banner = models.FileField()
+    banner = models.FileField(upload_to='HBanner')
     target_link = models.URLField(null=True)
     total_watch = models.IntegerField(default=0)
     status = models.BooleanField(default=True)
