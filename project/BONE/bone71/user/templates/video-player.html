@@ -19,6 +19,7 @@
 <body>
     <!-- top scrollbar section  -->
     <!-- <div class="container-fluid">
+    
         <div class="row">
             <div class="col-12 top_scroller">
                 <div class="container-xl">
@@ -82,17 +83,17 @@
                                           </video>
                                     </div>
                                     <div class="main-video-section">
-                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/nJT--MlnCBk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <iframe width="560" height="315" src="{{youtube}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </div>
                                 </div>
                                 <div class="played-video-details">
                                     <div class="video-title">
-                                        <p class="mb-0">The Mandalorian | Official Trailer | Streaming Nov. 12</p>
+                                        <p class="mb-0">{{title}}</p>
                                     </div>
                                 </div>
                                 <div class="video-description">
-                                    <p class="mb-1">After the stories of Jango and Boba Fett, another warrior emerges in the Star Wars universe. “The Mandalorian” is set after the fall of the Empire and before the emergence of the First Order.</p>
-                                    <a href="#" class="show_more">Show More</a>
+                                    <p class="mb-1">{{desc}}</p>
+                                   <!-- <a href="#" class="show_more">Show More</a>-->
                                 </div>
 
 
@@ -104,15 +105,15 @@
                                     </div>
                                     <div class="recommended-videos">
                                         <div class="video-item">
+                                        {% for i in similar_video %}
                                             <div class="video-item-image">
-                                                <img src="{% static 'user/image/r-image.png' %}" alt="">
+                                                <img src="{{i.poster}}" alt="">
                                             </div>
                                             <div class="video-item-details">
-                                                <a href="#" class="vi-movie-name">Chhalaang</a>
-                                                <p class="vi-movie-duration"><span class="vi-movie-type">Drama</span> <span class="duration"><span class="hour"></span><span class="min">44 Min</span> <span class="sec">43 Sec</span></span>
-                                                </p>
+                                                <a href="#" class="vi-movie-name">{{i.title}}</a>
                                                 <a href="#" class="vi-movie-play"><img class="mr-2" src="{% static 'user/image/vi-play-btn.png' %}" alt="">Play Now</a>
                                             </div>
+                                        {% endfor %}
                                         </div>
                                     </div>
                                 </div>
@@ -160,24 +161,11 @@
                                 <button class="customPrevBtn"><i class="fas fa-chevron-left"></i></button>
                             </div>
                             <div id="categories_slider" class="category-slider owl-carousel owl-theme">
+                                {% for i in categories %}
                                 <div class="item">
-                                    <a href="#" class="movie_category">Action</a>
+                                    <a href="#" class="movie_category" value="{{i.id}}">{{i.category_name}}</a>
                                 </div>
-                                <div class="item">
-                                    <a href="#" class="movie_category">Action</a>
-                                </div>
-                                <div class="item">
-                                    <a href="#" class="movie_category">Action</a>
-                                </div>
-                                <div class="item">
-                                    <a href="#" class="movie_category">Action</a>
-                                </div>
-                                <div class="item">
-                                    <a href="#" class="movie_category">Action</a>
-                                </div>
-                                <div class="item">
-                                    <a href="#" class="movie_category">Action</a>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

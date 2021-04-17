@@ -9,16 +9,54 @@ from django.utils.decorators import method_decorator
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
+from Boneadmin.models import YoutubeContent, ContentCategory
+
 #from .forms import AdminSignUpForm
 #from .decorators import admin_required
 
 
 def user_index(request):
+    category = ContentCategory.objects.filter().order_by('total_video')[0]
+    video = YoutubeContent.objects.filter(category=category.id).order_by('total_click')
+    video_list=[]
+    for i in video:
+        video_list.append({
+                    'title': i.content_name,
+                    'id': i.id,
+                    'poster': settings.MEDIA_URL+str(i.content_poster)
+                })
     context = {'index':'active'}
     return render(request, 'index.html', context)
 
 
+def user_video_player(request, pk):
+#    try:
+    video = YoutubeContent.objects.get(id=pk)
+    categories = ContentCategory.objects.filter()
+    
+    same_category_video = YoutubeContent.objects.filter(category=video.category.id).order_by('total_click')
+    same_category_video_list=[]
+    for i in same_category_video:
+        same_category_video_list.append({
+                    'title': i.content_name,
+                    'id': i.id,
+                    'poster': settings.MEDIA_URL+str(i.content_poster)
+                })
 
-def user_video_player(request):
-    context = {'video_player':'active'}
+    latest_video = YoutubeContent.objects.filter().order_by('created_at').reverse()
+    latest_video_list=[]
+    for i in latest_video:
+        latest_video_list.append({
+                    'title': i.content_name,
+                    'id': i.id,
+                    'poster': settings.MEDIA_URL+str(i.content_poster)
+                })
+
+    context = {'video_player':'active', 'categories':categories, 'c_len':len(categories),
+           'youtube':video.content_link, 'title': video.content_name,
+           'desc':video.content_description, 
+           'similar_video': same_category_video_list}
+    
     return render(request, 'video-player.html', context)
+#    except:
+#        return render(request, '404.html')
