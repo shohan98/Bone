@@ -206,7 +206,7 @@ $(document).ready(function() {
         window.location.href = 'video';
     });
     // video and ad render to another page 
-    document.getElementById('video').play();
+
 
 
     document.getElementById('video').addEventListener('ended', function(e) {
