@@ -18,7 +18,7 @@
 
 <body>
     <!-- top scrollbar section  -->
-    <div class="container-fluid">
+    <!-- <div class="container-fluid">
         <div class="row">
             <div class="col-12 top_scroller">
                 <div class="container-xl">
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- top scrollbar section  -->
 
     <!-- top menu section  -->
@@ -43,57 +43,8 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="browse_menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Browse
-						</a>
-                        <div class="dropdown-menu" aria-labelledby="browse_menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="Movie_menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Movie
-						</a>
-                        <div class="dropdown-menu" aria-labelledby="Movie_menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="tvShow_menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							TV Show
-						</a>
-                        <div class="dropdown-menu" aria-labelledby="tvShow_menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="Video_menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Video
-						</a>
-                        <div class="dropdown-menu" aria-labelledby="Video_menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">News</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <div class="input-group pl-5 pr-5">
+                        <div class="input-group pr-5">
                             <input type="text" class="form-control" placeholder="Search here ..." aria-label="search" aria-describedby="button-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
@@ -101,7 +52,13 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true"><i class="fas fa-sign-out-alt"></i> Login</a>
+                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true" data-toggle="modal" data-target="#login-modal"><i class="fas fa-sign-out-alt"></i> Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true" data-toggle="modal" data-target="#signup-modal"><i class="fas fa-sign-out-alt"></i> Registration</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true" data-toggle="modal" data-target="#all-modal"> other modal</a>
                     </li>
                 </ul>
             </div>
@@ -118,7 +75,15 @@
                         <div class="row">
                             <div class="col-lg-8 col-12">
                                 <div class="video-container">
-                                    <iframe src="https://www.youtube.com/embed/Gcg__eDktgY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <div class="ad-video-section">
+                                        <video autoplay id="video">
+                                            <source src="{% static 'user/video/adVideo.mp4' %}" type="video/mp4">
+                                            <source src="{% static 'user/video/adVideo.mp4' %}" type="video/ogg">
+                                          </video>
+                                    </div>
+                                    <div class="main-video-section">
+                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/nJT--MlnCBk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
                                 </div>
                                 <div class="played-video-details">
                                     <div class="video-title">
@@ -129,8 +94,8 @@
                                     <p class="mb-1">After the stories of Jango and Boba Fett, another warrior emerges in the Star Wars universe. “The Mandalorian” is set after the fall of the Empire and before the emergence of the First Order.</p>
                                     <a href="#" class="show_more">Show More</a>
                                 </div>
-                                
-                           
+
+
                             </div>
                             <div class="col-lg-4 col-12">
                                 <div class="recommended-videos-container">

@@ -596,6 +596,20 @@ button:focus {
     display: inline-block;
 }
 
+.ad-video-section {
+    height: 100%;
+}
+
+.ad-video-section video {
+    height: 100%;
+    width: 100%;
+}
+
+.main-video-section {
+    display: none;
+    height: 100%;
+}
+
 @media (max-width: 1439.98px) {
     .left-ad-section {
         display: none;

@@ -198,11 +198,20 @@ $(document).ready(function() {
         $(this).closest('.slider_nav_arrow').siblings('.owl-carousel').children('.owl-nav').find('.owl-prev').click()
     });
 
+    // video and ad render to another page 
+    $('.movie_poster').click(function() {
+        id = $(this).attr('video-id');
+        mainVideoUrl = $(this).attr('main-video-url');
+        // window.location.href = 'video' + '/' + id;
+        window.location.href = 'video';
+    });
+    // video and ad render to another page 
 
-    // show icons 
-    // $('.c_sldier .owl-item').hover(function() {
-    //     $('.movie_play_icon').slideToggle(200);
-    // });
-    // show icons 
 
+    document.getElementById('video').addEventListener('ended', function(e) {
+        var src = $('.main-video-section iframe').attr('src')
+        $('.ad-video-section').slideToggle();
+        $('.main-video-section').slideToggle();
+        $('.main-video-section iframe').attr('src', src + '?autoplay=1')
+    });
 });
