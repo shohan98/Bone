@@ -24,21 +24,21 @@
                     </tr>
                     <tbody>
                         {% for i in data %}
-                            <tr>
-                                <td class="ad_image">
-                                    <div>
-                                        <img src="{{i.banner}}" alt="">
-                                    </div>
-                                </td>
-                                <td class="ad_name">
-                                    <p class="mb-0">{{i.banner_name}}</p>
-                                    <p class="ad_position mb-0">Vertical | left</p>
-                                </td>
-                                <td class="video_action">
-                                    <a href="#" class="edit"><img src="{% static 'boneadmin/img/edit_icon.png' %}" alt=""></a>
-                                    <a href="#" class="delete_video"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td class="ad_image">
+                                <div>
+                                    <img src="{{i.banner}}" alt="">
+                                </div>
+                            </td>
+                            <td class="ad_name">
+                                <p class="mb-0">{{i.banner_name}}</p>
+                                <p class="ad_position mb-0">Vertical | left</p>
+                            </td>
+                            <td class="video_action">
+                                <a href="#" class="edit"><img src="{% static 'boneadmin/img/edit_icon.png' %}" alt=""></a>
+                                <a href="#" class="delete_video" data-toggle="modal" data-target="#delete_video_modal"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
+                            </td>
+                        </tr>
                         {% endfor %}
                     </tbody>
                 </table>
@@ -51,7 +51,7 @@
 <div class="modal fade add_video_modal" id="add_banner_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-        
+
             <div class="modal-header">
                 <h4 class="modal-title text-green" id="exampleModalCenterTitle">Add Banner</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -60,7 +60,7 @@
             </div>
             <div class="modal-body">
                 <form method="POST" action={% url 'boneadmin:bannerad' %} enctype="multipart/form-data">
-                {% csrf_token %}
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="customFile">Image Upload</label>
                         <div class="custom-file">
@@ -84,4 +84,5 @@
         </div>
     </div>
 </div>
+
 {% endblock %}

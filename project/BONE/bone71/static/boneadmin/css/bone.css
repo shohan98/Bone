@@ -12170,6 +12170,10 @@ body.sidebar-toggled footer.sticky-footer {
     border: 1px solid #47B881;
 }
 
+textarea {
+    border: 1px solid #47B881!important;
+}
+
 .add_video_modal {
     border: none;
     background: #FFFFFF;
@@ -12198,6 +12202,47 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 #add_banner_modal .custom-file-label,
-#add_banner_modal select {
+#add_banner_modal select,
+#add_video_modal select,
+#add_video_modal .custom-file-label {
     border: 1px solid #47B881;
+}
+
+.video_image {
+    min-width: 10%;
+    width: 130px;
+}
+
+.video_name {
+    width: 60%;
+}
+
+.video_image img {
+    width: 100%;
+}
+
+.video_cateogry {
+    width: 20%;
+}
+
+.video_action {
+    width: 10%;
+}
+
+.ad_image {
+    width: 130px;
+}
+
+.ad_image img,
+.ad_image video {
+    max-width: 100%;
+}
+
+.table tr,
+.table td {
+    padding: 0 auto;
+}
+
+.all-modal .modal-header {
+    border-bottom: none;
 }

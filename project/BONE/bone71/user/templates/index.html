@@ -18,7 +18,7 @@
 
 <body>
     <!-- top scrollbar section  -->
-    <div class="container-fluid">
+    <!-- <div class="container-fluid">
         <div class="row">
             <div class="col-12 top_scroller">
                 <div class="container-xl">
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- top scrollbar section  -->
 
     <!-- top menu section  -->
@@ -56,6 +56,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" tabindex="-1" aria-disabled="true" data-toggle="modal" data-target="#signup-modal"><i class="fas fa-sign-out-alt"></i> Registration</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true" data-toggle="modal" data-target="#all-modal"> other modal</a>
                     </li>
                 </ul>
             </div>
@@ -535,8 +538,8 @@
                             <input type="text" class="form-control" id="username" aria-describedby="username">
                         </div>
                         <div class="form-group">
-                            <label for="email">Username</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="email">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
@@ -550,6 +553,26 @@
         </div>
     </div>
     <!-- signup modal  -->
+    <!-- all modal  -->
+    <div class="modal fade all-modal" id="all-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body text-center">
+                    <h4>You need to login first</h4>
+                    <div class="all-button mt-5">
+                        <button class="btn btn-primary btn-login">Login</button>
+                        <button class="btn btn-primary btn-registration">Registration</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- all modal  -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

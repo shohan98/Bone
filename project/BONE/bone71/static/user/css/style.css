@@ -160,10 +160,6 @@ a:hover {
     border-radius: 5px;
 }
 
-#latest_slider img {
-    height: 350px;
-}
-
 .slider_nav_category {
     position: relative;
     width: 100%;
@@ -194,15 +190,18 @@ a:hover {
     position: relative;
 }
 
-.slider_nav_arrow {
+
+/* .slider_nav_arrow {
     position: absolute;
     width: 100%;
     z-index: 2;
     top: 50%;
     transform: translateY(-50%);
-}
+} */
 
-.slider_nav_arrow .customPrevBtn {
+.c_sldier .customPrevBtn {
+    position: absolute;
+    left: 0;
     float: left;
     background-color: rgba(255, 255, 255, 0.83);
     border-radius: 2px;
@@ -210,9 +209,16 @@ a:hover {
     height: 55px;
     color: #0066DA;
     border: none;
+    cursor: pointer;
+    z-index: 2;
+    top: 50%;
+    left: 20px;
+    transform: translate(-50%, -50%);
 }
 
-.slider_nav_arrow .customNextBtn {
+.c_sldier .customNextBtn {
+    position: absolute;
+    right: 0;
     float: right;
     background-color: rgba(255, 255, 255, 0.83);
     border-radius: 2px;
@@ -220,6 +226,11 @@ a:hover {
     height: 55px;
     color: #0066DA;
     border: none;
+    cursor: pointer;
+    z-index: 2;
+    top: 50%;
+    right: -20px;
+    transform: translate(-50%, -50%);
 }
 
 .promotional_movie {
@@ -517,6 +528,72 @@ button:focus {
 
 .hero_img {
     min-height: 370px;
+}
+
+.item {
+    position: relative;
+    transition: all .5s ease;
+    max-height: 150px;
+}
+
+.item-img {
+    height: 100%;
+}
+
+.c_sldier .owl-item {
+    transition: all .5s ease;
+}
+
+.c_sldier .owl-item :hover {
+    cursor: pointer;
+}
+
+.movie_play_icon {
+    width: 30px;
+    position: absolute;
+    z-index: 2;
+    bottom: -50px;
+    right: calc(50% - 15px);
+    -webkit-transition: bottom 0.8s ease;
+    -moz-transition: bottom 0.8s ease;
+    -o-transition: bottom 0.8s ease;
+    -ms-transition: bottom 0.8s ease;
+    transition: bottom 0.8s ease;
+}
+
+.c_sldier .owl-item:hover .movie_play_icon {
+    visibility: visible;
+    bottom: calc(50% - 15px);
+    right: calc(50% - 15px)
+}
+
+.favourite_movie img,
+.share_movie img {
+    width: 20px!important;
+    height: 20px!important;
+}
+
+.right_icon {
+    position: absolute;
+    right: -10px;
+    top: 10px;
+    visibility: hidden;
+    z-index: 2;
+    -webkit-transition: right 0.8s ease;
+    -moz-transition: right 0.8s ease;
+    -o-transition: right 0.8s ease;
+    -ms-transition: right 0.8s ease;
+    transition: right 0.8s ease;
+}
+
+.c_sldier .owl-item:hover .right_icon {
+    visibility: visible;
+    top: 10px;
+    right: 15px;
+}
+
+.right_icon a {
+    display: inline-block;
 }
 
 @media (max-width: 1439.98px) {

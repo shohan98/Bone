@@ -9,7 +9,7 @@
     <!-- Content Row -->
     <div class="row">
         <div class="col-12 video_list">
-        {{message}}
+            {{message}}
             <h4 class="video_list_heading"><span class="text-green">Youtube Video List</span>
                 <div class="buttons">
                     <a href="#" class="btn btn-success btn-new-video" data-toggle="modal" data-target="#add_video_modal">Add New Video</a>
@@ -40,7 +40,7 @@
                             </td>
                             <td class="video_action">
                                 <a href="#" class="edit"><img src="{% static 'boneadmin/img/edit_icon.png' %}" alt=""></a>
-                                <a href="#" class="delete_video"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
+                                <a href="#" class="delete_video_btn" data-toggle="modal" data-target="#delete_video_modal"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -64,15 +64,14 @@
             </div>
             <div class="modal-body">
                 <form method="POST" action={% url 'boneadmin:youtube' %} enctype="multipart/form-data">
-                {% csrf_token %}
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="youtube_link">Drop Youtube Link</label>
-                        <input type="text" class="form-control" id="youtube_link" 
-                        aria-describedby="emailHelp" name="link" placeholder="Paste youtube link here..."  required >
+                        <input type="text" class="form-control" id="youtube_link" aria-describedby="emailHelp" name="link" placeholder="Paste youtube link here..." required>
                     </div>
                     <div class="form-group">
                         <label for="Category">Category</label>
-                        <select class="form-control" id="Category" name="video_category"  required >
+                        <select class="form-control" id="Category" name="video_category" required>
                         {% for i in category %}
                             <option value="{{i.id}}">{{i.category_name}}</option>
                         {% endfor %}
@@ -80,16 +79,16 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Conetent Name"  required >
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Conetent Name" required>
                     </div>
                     <div class="form-group">
                         <label for="name">Description</label>
-                        <input type="text" class="form-control" id="desc" name="desc" placeholder="Enter Conetent Description"  required >
+                        <textarea type="text" class="form-control" id="desc" name="desc" placeholder="Enter Conetent Description" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="thumbnail">Thumbnail</label>
                         <div class="custom-file">
-                            <input class="custom-file-input" id="thumbnail" name="poster" type="file" required >
+                            <input class="custom-file-input" id="thumbnail" name="poster" type="file" required>
                             <label class="custom-file-label" for="customFile">Choose Thumbnail Image</label>
                         </div>
                     </div>
@@ -102,4 +101,27 @@
     </div>
 </div>
 <!-- /.container-fluid -->
+<!-- delete modal  -->
+<div class="modal fade delete_video_modal" id="delete_video_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="text-green" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <form method="POST" action='#' enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h3> Are you sure you want to delete this Item ?</h3>
+                    <button type="button" class="btn btn-success submit-btn delete_video mr-2">Submit</button>
+                    <button type="button" class="btn btn-danger cancle-btn" data-dismiss="modal">Cancel</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- delete modal  -->
 {% endblock %}
