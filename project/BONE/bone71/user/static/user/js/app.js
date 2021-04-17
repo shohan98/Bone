@@ -24,7 +24,7 @@ $(document).ready(function() {
     // categories slider 
 
     $('.category-slider').owlCarousel({
-        loop: true,
+        loop: false,
         margin: 10,
         nav: false,
         dots: false,
