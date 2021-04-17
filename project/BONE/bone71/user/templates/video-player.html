@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -11,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
     <title>Video page</title>
 </head>
 
@@ -35,7 +36,7 @@
     <!-- top menu section  -->
     <div class="container-xl p-0">
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
-            <a class="navbar-brand" href="index.html"><img src="image/BONE-Logo.png" alt=""></a>
+            <a class="navbar-brand" href="index.html"><img src="{% static 'user/image/BONE-Logo.png' %}" alt=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			  <span class="navbar-toggler-icon"></span>
 			</button>
@@ -122,59 +123,14 @@
                                 <div class="played-video-details">
                                     <div class="video-title">
                                         <p class="mb-0">The Mandalorian | Official Trailer | Streaming Nov. 12</p>
-                                        <p class="video-info"><span class="release-date">2019</span>•<span class="dutration">8 min</span>•<span class="quality">720p</span>•<span class="size">2GB</span></p>
-                                    </div>
-                                    <div class="video-option">
-                                        <button class="btn btn-dark btn-add-to-list"><img class="mr-2" src="image/add_icon.png" alt="">  Add to list</button>
-                                        <button class="btn btn-success btn-share"><img class="mr-2" src="image/share_icon.png" alt=""> Share</button>
                                     </div>
                                 </div>
                                 <div class="video-description">
                                     <p class="mb-1">After the stories of Jango and Boba Fett, another warrior emerges in the Star Wars universe. “The Mandalorian” is set after the fall of the Empire and before the emergence of the First Order.</p>
                                     <a href="#" class="show_more">Show More</a>
                                 </div>
-                                <div class="video_cast">
-                                    <p class="cast-heading">Cast</p>
-                                    <div class="cast_section">
-                                        <img src="image/cast.png" alt="">
-                                        <p class="mb-0 castname">Salman Abir</p>
-                                    </div>
-                                    <div class="cast_section">
-                                        <img src="image/cast.png" alt="">
-                                        <p class="mb-0 castname">Shohannur Rsahman</p>
-                                    </div>
-                                    <div class="cast_section">
-                                        <img src="image/cast.png" alt="">
-                                        <p class="mb-0 castname">Salman Abir</p>
-                                    </div>
-                                    <div class="cast_section">
-                                        <img src="image/cast.png" alt="">
-                                        <p class="mb-0 castname">Shohannur Rsahman</p>
-                                    </div>
-                                    <div class="cast_section">
-                                        <img src="image/cast.png" alt="">
-                                        <p class="mb-0 castname">Salman Abir</p>
-                                    </div>
-                                    <div class="cast_section">
-                                        <img src="image/cast.png" alt="">
-                                        <p class="mb-0 castname">Shohannur Rsahman</p>
-                                    </div>
-                                    <div class="cast_section">
-                                        <img src="image/cast.png" alt="">
-                                        <p class="mb-0 castname">Salman Abir</p>
-                                    </div>
-                                    <div class="cast_section">
-                                        <img src="image/cast.png" alt="">
-                                        <p class="mb-0 castname">Shohannur Rsahman</p>
-                                    </div>
-                                </div>
-                                <div class="video_cast">
-                                    <p class="cast-heading">Director</p>
-                                    <div class="cast_section ml-0">
-                                        <img src="image/cast.png" alt="">
-                                        <p class="mb-0 castname">Salman Abir</p>
-                                    </div>
-                                </div>
+                                
+                           
                             </div>
                             <div class="col-lg-4 col-12">
                                 <div class="recommended-videos-container">
@@ -184,13 +140,13 @@
                                     <div class="recommended-videos">
                                         <div class="video-item">
                                             <div class="video-item-image">
-                                                <img src="image/r-image.png" alt="">
+                                                <img src="{% static 'user/image/r-image.png' %}" alt="">
                                             </div>
                                             <div class="video-item-details">
                                                 <a href="#" class="vi-movie-name">Chhalaang</a>
                                                 <p class="vi-movie-duration"><span class="vi-movie-type">Drama</span> <span class="duration"><span class="hour"></span><span class="min">44 Min</span> <span class="sec">43 Sec</span></span>
                                                 </p>
-                                                <a href="#" class="vi-movie-play"><img class="mr-2" src="image/vi-play-btn.png" alt="">Play Now</a>
+                                                <a href="#" class="vi-movie-play"><img class="mr-2" src="{% static 'user/image/vi-play-btn.png' %}" alt="">Play Now</a>
                                             </div>
                                         </div>
                                     </div>
@@ -211,7 +167,7 @@
                 <div class="row">
                     <div class="col-12 top_ad_section">
                         <a href="#">
-                            <img src="image/top_img.png" alt="">
+                            <img src="{% static 'user/image/top_img.png' %}" alt="">
                         </a>
                     </div>
                 </div>
@@ -219,12 +175,12 @@
                     <div class="col-12">
                         <div class="left-ad-section">
                             <a href="#">
-                                <img src="image/bigimage.png" alt="">
+                                <img src="{% static 'user/image/bigimage.png' %}" alt="">
                             </a>
                         </div>
                         <div class="right-ad-section">
                             <a href="#">
-                                <img src="image/bigimage.png" alt="">
+                                <img src="{% static 'user/image/bigimage.png' %}" alt="">
                             </a>
                         </div>
                     </div>
@@ -274,32 +230,32 @@
                             <div id="most_popular_slider" class="most_popular_slider owl-carousel owl-theme">
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -319,32 +275,32 @@
                             <div id="latest_slider" class="latest-video-slider owl-carousel owl-theme">
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -364,32 +320,32 @@
                             <div id="movie_slider" class="movie_slider owl-carousel owl-theme">
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -409,32 +365,32 @@
                             <div id="Top_Regeional_slider" class="Top_Regeional_slider owl-carousel owl-theme">
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="image/latest1.png" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -455,7 +411,7 @@
             <div class="container-xl">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-12">
-                        <img src="image/BONE-Logo-transparent.png" alt="">
+                        <img src="{% static 'user/image/BONE-Logo-transparent.png' %}" alt="">
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                         <div class="social_icon">
                             <a class="icon" href="#"><i class="fab fa-facebook"></i></a>
@@ -513,7 +469,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"></script>
-    <script src="js/app.js"></script>
+    <script src="{% static 'user/js/app.js' %}"></script>
 </body>
 
 </html>

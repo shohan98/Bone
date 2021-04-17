@@ -8,6 +8,7 @@
     <!-- Content Row -->
     <div class="row">
         <div class="col-12 banner_list">
+            {{message}}
             <h4 class="banner_list_heading"><span class="text-green">Banner Ad</span>
                 <div class="buttons">
                     <a href="#" class="btn btn-success btn-new-video" data-toggle="modal" data-target="#add_banner_modal">Add New banner</a>
@@ -22,21 +23,23 @@
                         <th class="video_action">Action</th>
                     </tr>
                     <tbody>
-                        <tr>
-                            <td class="ad_image">
-                                <div>
-                                    <img src="{% static 'boneadmin/img/vertical_ad.png' %}" alt="">
-                                </div>
-                            </td>
-                            <td class="ad_name">
-                                <p class="mb-0">Banner 1</p>
-                                <p class="ad_position mb-0">Vertical | left</p>
-                            </td>
-                            <td class="video_action">
-                                <a href="#" class="edit"><img src="{% static 'boneadmin/img/edit_icon.png' %}" alt=""></a>
-                                <a href="#" class="delete_video"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
-                            </td>
-                        </tr>
+                        {% for i in data %}
+                            <tr>
+                                <td class="ad_image">
+                                    <div>
+                                        <img src="{{i.banner}}" alt="">
+                                    </div>
+                                </td>
+                                <td class="ad_name">
+                                    <p class="mb-0">{{i.banner_name}}</p>
+                                    <p class="ad_position mb-0">Vertical | left</p>
+                                </td>
+                                <td class="video_action">
+                                    <a href="#" class="edit"><img src="{% static 'boneadmin/img/edit_icon.png' %}" alt=""></a>
+                                    <a href="#" class="delete_video"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -48,6 +51,7 @@
 <div class="modal fade add_video_modal" id="add_banner_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
+        
             <div class="modal-header">
                 <h4 class="modal-title text-green" id="exampleModalCenterTitle">Add Banner</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -55,23 +59,24 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action={% url 'boneadmin:bannerad' %} enctype="multipart/form-data">
+                {% csrf_token %}
                     <div class="form-group">
                         <label for="customFile">Image Upload</label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile">
+                            <input type="file" class="custom-file-input" id="customFile" name="banner">
                             <label class="custom-file-label" for="customFile">Choose file</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="banner_name">Banner Name</label>
-                        <input type="text" class="form-control" name="" id="banner_name" placeholder="Banner Name">
+                        <input type="text" class="form-control" name="name" id="banner_name" placeholder="Banner Name">
                     </div>
                     <div class="form-group">
                         <label for="target_url">Target URL</label>
-                        <input type="text" class="form-control" id="target_url" aria-describedby="emailHelp" placeholder="Video Name">
+                        <input type="text" class="form-control" id="target_url" name="link" aria-describedby="emailHelp" placeholder="Video Name">
                     </div>
-                    <button type="button" class="btn btn-success submit-btn mr-2" data-dismiss="modal">Submit</button>
+                    <button type="submit" class="btn btn-success submit-btn mr-2">Submit</button>
                     <button type="button" class="btn btn-default cancle-btn" data-dismiss="modal">Cancel</button>
                 </form>
 

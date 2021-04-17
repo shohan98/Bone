@@ -8,6 +8,7 @@
 
     <!-- Content Row -->
     <div class="row">
+    {{message}}
         <div class="col-12 banner_list">
             <h4 class="banner_list_heading"><span class="text-green">Video Banner Ad</span>
                 <div class="buttons">
@@ -18,12 +19,13 @@
             <div class="banner-list mt-3">
                 <table class="table table-borderless">
                     <tbody>
+                        {% for i in data %}
                         <tr>
                             <td class="ad_image">
-                                <img src="{% static 'boneadmin/img/vertical_ad.png' %}" alt="">
+                                <img src="{{i.video}" alt="">
                             </td>
                             <td class="ad_name">
-                                <p class="mb-0">Banner 1</p>
+                                <p class="mb-0">{{i.video_name}}</p>
                                 <p class="ad_position mb-0">Vertical | left</p>
                             </td>
                             <td class="video_action">
@@ -31,21 +33,7 @@
                                 <a href="#" class="delete_video"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
                             </td>
                         </tr>
-                        <tr>
-                            <td class="ad_image">
-                                <div>
-                                    <img src="{% static 'boneadmin/img/horizontal_ad.png' %}" alt="">
-                                </div>
-                            </td>
-                            <td class="ad_name">
-                                <p class="mb-0">Banner 1</p>
-                                <p class="ad_position mb-0">horizontal | left</p>
-                            </td>
-                            <td class="video_action">
-                                <a href="#" class="edit"><img src="{% static 'boneadmin/img/edit_icon.png' %}" alt=""></a>
-                                <a href="#" class="delete_video"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
-                            </td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -65,19 +53,20 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action={% url 'boneadmin:videoad' %} enctype="multipart/form-data">
+                {% csrf_token %}
                     <div class="form-group">
                         <label for="customFile">Video Upload</label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile">
-                            <label class="custom-file-label" for="customFile">Choose Video</label>
+                            <input type="file" class="custom-file-input" id="customFile" name="video">
+                            <label class="custom-file-label" for="customFile" >Choose Video</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="video_name">Video Name</label>
-                        <input type="text" class="form-control" id="video_name" aria-describedby="emailHelp" placeholder="Video Name">
+                        <input type="text" class="form-control" id="video_name" name="name" aria-describedby="emailHelp" placeholder="Video Name">
                     </div>
-                    <button type="button" class="btn btn-success submit-btn mr-2" data-dismiss="modal">Submit</button>
+                    <button type="submit" class="btn btn-success submit-btn mr-2">Submit</button>
                     <button type="button" class="btn btn-default cancle-btn" data-dismiss="modal">Cancel</button>
                 </form>
 
