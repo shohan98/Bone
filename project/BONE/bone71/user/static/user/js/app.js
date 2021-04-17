@@ -207,8 +207,8 @@ $(document).ready(function() {
     });
     // video and ad render to another page 
 
-
     document.getElementById('video').addEventListener('ended', function(e) {
+        console.log('ended')
         var src = $('.main-video-section iframe').attr('src')
         $('.ad-video-section').slideToggle();
         $('.main-video-section').slideToggle();
