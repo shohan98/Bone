@@ -186,7 +186,7 @@ a:hover {
     border: none;
 }
 
-.c_sldier {
+.c_slider {
     position: relative;
 }
 
@@ -199,7 +199,7 @@ a:hover {
     transform: translateY(-50%);
 } */
 
-.c_sldier .customPrevBtn {
+.c_slider .customPrevBtn {
     position: absolute;
     left: 0;
     float: left;
@@ -216,7 +216,7 @@ a:hover {
     transform: translate(-50%, -50%);
 }
 
-.c_sldier .customNextBtn {
+.c_slider .customNextBtn {
     position: absolute;
     right: 0;
     float: right;
@@ -540,11 +540,11 @@ button:focus {
     height: 100%;
 }
 
-.c_sldier .owl-item {
+.c_slider .owl-item {
     transition: all .5s ease;
 }
 
-.c_sldier .owl-item :hover {
+.c_slider .owl-item :hover {
     cursor: pointer;
 }
 
@@ -561,7 +561,7 @@ button:focus {
     transition: bottom 0.8s ease;
 }
 
-.c_sldier .owl-item:hover .movie_play_icon {
+.c_slider .owl-item:hover .movie_play_icon {
     visibility: visible;
     bottom: calc(50% - 15px);
     right: calc(50% - 15px)
@@ -586,7 +586,7 @@ button:focus {
     transition: right 0.8s ease;
 }
 
-.c_sldier .owl-item:hover .right_icon {
+.c_slider .owl-item:hover .right_icon {
     visibility: visible;
     top: 10px;
     right: 15px;
