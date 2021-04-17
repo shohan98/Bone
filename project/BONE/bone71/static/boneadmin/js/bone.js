@@ -55,11 +55,12 @@
     $('.tag-close-icon').click(function() {
         $(this).closest('.tags-span').remove();
     });
+
+    let selected_video = $(this).closest('tr');
     $('.delete_video').click(function() {
-        $(this).closest('tr').remove();
+        console.log(selected_video)
+        selected_video.remove();
     });
-
-
 })(jQuery); // End of use strict
 
 function addCategory() {

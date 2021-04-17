@@ -15,7 +15,7 @@ router = DefaultRouter()
 
 urlpatterns = [
   path('', user_index, name='index'),
-  path('video', user_video_player, name='video_player'),
+  path('video/<int:pk>/', user_video_player, name='video_player'),
   
   
 #  path('boneuser/api/', include(router.urls)),
