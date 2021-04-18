@@ -176,7 +176,7 @@
                 <!-- most action section  -->
                 <div class="row mt-5">
                     <div class="container-xl categories_scroller_section">
-                        <h4 class="text-white mb-4">Most Action Movies <a href="#" class="more">More Videos</a></h4>
+                        <h4 class="text-white mb-4">Most Action Movies </h4>
                         <div class="c_slider">
                             <div class="slider_nav_m_popular slider_nav_arrow">
                                 <button class="customNextBtn"><i class="fas fa-chevron-right"></i></button>
@@ -221,7 +221,7 @@
                 <!-- latest section  -->
                 <div class="row">
                     <div class="container-xl categories_scroller_section">
-                        <h4 class="text-white mb-4">Latest Videos <a href="#" class="more">More Videos</a></h4>
+                        <h4 class="text-white mb-4">Latest Videos </h4>
                         <div class="c_slider">
                             <div class="slider_nav_Latest slider_nav_arrow">
                                 <button class="customNextBtn"><i class="fas fa-chevron-right"></i></button>
@@ -243,43 +243,20 @@
                 <!-- most viewed section  -->
                 <div class="row">
                     <div class="container-xl categories_scroller_section">
-                        <h4 class="text-white mb-4">Most Viewed Movie <a href="#" class="more">More Videos</a></h4>
+                        <h4 class="text-white mb-4">Most Viewed Video </h4>
                         <div class="c_slider">
                             <div class="slider_nav_movie slider_nav_arrow">
                                 <button class="customNextBtn"><i class="fas fa-chevron-right"></i></button>
                                 <button class="customPrevBtn"><i class="fas fa-chevron-left"></i></button>
                             </div>
                             <div id="movie_slider" class="movie_slider owl-carousel owl-theme">
+                            {% for i in most_watch_video %}
                                 <div class="item">
-                                    <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
+                                    <a href="https://www.youtube.com/embed/{{i.link}}">
+                                        <img src="{{i.poster}}" alt="">
                                     </a>
                                 </div>
-                                <div class="item">
-                                    <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
-                                    </a>
-                                </div>
+                            {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -288,7 +265,7 @@
                 <!-- top regional section  -->
                 <div class="row">
                     <div class="container-xl categories_scroller_section">
-                        <h4 class="text-white mb-4">Top Regional Shows <a href="#" class="more">More Videos</a></h4>
+                        <h4 class="text-white mb-4">Top Regional Shows </h4>
                         <div class="c_slider">
                             <div class="slider_nav_Topr slider_nav_arrow">
                                 <button class="customNextBtn"><i class="fas fa-chevron-right"></i></button>

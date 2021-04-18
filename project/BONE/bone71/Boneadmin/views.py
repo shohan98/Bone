@@ -285,3 +285,9 @@ def admin_youtube(request):
             
     context = {'youtube':'active', 'data':data, 'message': message, 'category':category_list}
     return render(request, 'youtube.html', context)
+
+@login_required
+@admin_required
+def logout_view(request):
+    logout(request)
+    return redirect('boneadmin:login')
