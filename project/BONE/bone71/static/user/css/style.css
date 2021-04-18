@@ -90,12 +90,12 @@ a:hover {
     border-radius: 2px;
     width: 41px;
     height: 55px;
-    color: #0066DA;
+    color: #3D6CC9;
     border: none;
 }
 
 .slider_nav .customNextBtn {
-    color: #0066DA;
+    color: #3D6CC9;
     float: right;
     background-color: rgba(255, 255, 255, 0.83);
     border-radius: 2px;
@@ -129,7 +129,7 @@ a:hover {
 }
 
 .blue-bg {
-    background: #0066DA;
+    background: #3D6CC9;
     min-height: 300px;
     padding: 0px 15px;
 }
@@ -152,7 +152,7 @@ a:hover {
     line-height: 50px;
     display: block;
     height: 55px;
-    background: #0066DA;
+    background: #3D6CC9;
     box-sizing: border-box;
     /* Elevation - 4 */
     border: 1px solid #FFFFFF;
@@ -172,7 +172,7 @@ a:hover {
     border-radius: 2px;
     width: 41px;
     height: 55px;
-    color: #0066DA;
+    color: #3D6CC9;
     border: none;
 }
 
@@ -182,11 +182,11 @@ a:hover {
     border-radius: 2px;
     width: 41px;
     height: 55px;
-    color: #0066DA;
+    color: #3D6CC9;
     border: none;
 }
 
-.c_sldier {
+.c_slider {
     position: relative;
 }
 
@@ -199,7 +199,7 @@ a:hover {
     transform: translateY(-50%);
 } */
 
-.c_sldier .customPrevBtn {
+.c_slider .customPrevBtn {
     position: absolute;
     left: 0;
     float: left;
@@ -207,7 +207,7 @@ a:hover {
     border-radius: 2px;
     width: 41px;
     height: 55px;
-    color: #0066DA;
+    color: #3D6CC9;
     border: none;
     cursor: pointer;
     z-index: 2;
@@ -216,7 +216,7 @@ a:hover {
     transform: translate(-50%, -50%);
 }
 
-.c_sldier .customNextBtn {
+.c_slider .customNextBtn {
     position: absolute;
     right: 0;
     float: right;
@@ -224,7 +224,7 @@ a:hover {
     border-radius: 2px;
     width: 41px;
     height: 55px;
-    color: #0066DA;
+    color: #3D6CC9;
     border: none;
     cursor: pointer;
     z-index: 2;
@@ -345,7 +345,7 @@ button:focus {
 
 .recommended-videos-container {
     max-height: 100%;
-    background: #0066DA;
+    background: #3D6CC9;
     border-radius: 5px;
 }
 
@@ -540,11 +540,11 @@ button:focus {
     height: 100%;
 }
 
-.c_sldier .owl-item {
+.c_slider .owl-item {
     transition: all .5s ease;
 }
 
-.c_sldier .owl-item :hover {
+.c_slider .owl-item :hover {
     cursor: pointer;
 }
 
@@ -561,7 +561,7 @@ button:focus {
     transition: bottom 0.8s ease;
 }
 
-.c_sldier .owl-item:hover .movie_play_icon {
+.c_slider .owl-item:hover .movie_play_icon {
     visibility: visible;
     bottom: calc(50% - 15px);
     right: calc(50% - 15px)
@@ -586,7 +586,7 @@ button:focus {
     transition: right 0.8s ease;
 }
 
-.c_sldier .owl-item:hover .right_icon {
+.c_slider .owl-item:hover .right_icon {
     visibility: visible;
     top: 10px;
     right: 15px;

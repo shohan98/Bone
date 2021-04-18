@@ -34,7 +34,7 @@ class YoutubeContent(models.Model):
     content_description = models.CharField(max_length=3000, blank=True)
     content_poster = models.ImageField(upload_to='Poster' ,blank=True)
     category = models.ForeignKey(ContentCategory, on_delete=models.CASCADE)
-    content_link = models.URLField(unique=True)
+    content_link = models.CharField(max_length=600, unique=True)
     total_click = models.IntegerField(default=0)
     status = models.BooleanField(default=True)
     added_by_ip = models.CharField(max_length=25)

@@ -24,7 +24,7 @@ $(document).ready(function() {
     // categories slider 
 
     $('.category-slider').owlCarousel({
-        loop: true,
+        loop: false,
         margin: 10,
         nav: false,
         dots: false,
@@ -207,11 +207,17 @@ $(document).ready(function() {
     });
     // video and ad render to another page 
 
-
-    document.getElementById('video').addEventListener('ended', function(e) {
-        var src = $('.main-video-section iframe').attr('src')
-        $('.ad-video-section').slideToggle();
-        $('.main-video-section').slideToggle();
-        $('.main-video-section iframe').attr('src', src + '?autoplay=1')
-    });
+    var video = $('#video').length;
+    if (video) {
+        // document.getElementById('video').removeAttribute('muted');
+        // document.getElementById('video').play();
+        console.log('got video', video)
+        document.getElementById('video').addEventListener('ended', function(e) {
+            console.log('ended')
+            var src = $('.main-video-section iframe').attr('src')
+            $('.ad-video-section').slideToggle();
+            $('.main-video-section').slideToggle();
+            $('.main-video-section iframe').attr('src', src + '?autoplay=1')
+        });
+    }
 });

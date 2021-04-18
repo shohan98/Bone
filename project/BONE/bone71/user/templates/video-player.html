@@ -83,12 +83,13 @@
                                           </video>
                                     </div>
                                     <div class="main-video-section">
-                                        <iframe width="560" height="315" src="{{youtube}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/{{youtube}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </div>
                                 </div>
                                 <div class="played-video-details">
                                     <div class="video-title">
                                         <p class="mb-0">{{title}}</p>
+                                        <p class="mb-0"><i class="fas fa-eye mr-1" aria-hidden="true"></i> {{views}}</p>
                                     </div>
                                 </div>
                                 <div class="video-description">
@@ -111,7 +112,8 @@
                                             </div>
                                             <div class="video-item-details">
                                                 <a href="#" class="vi-movie-name">{{i.title}}</a>
-                                                <a href="#" class="vi-movie-play"><img class="mr-2" src="{% static 'user/image/vi-play-btn.png' %}" alt="">Play Now</a>
+                                                <p class="mb-0"><i class="fas fa-eye mr-1" aria-hidden="true"></i> {{views}}</p>
+                                                <a href="https://www.youtube.com/embed/{{i.link}}" class="vi-movie-play"><img class="mr-2" src="{% static 'user/image/vi-play-btn.png' %}" alt="">Play Now</a>
                                             </div>
                                             {% endfor %}
                                         </div>
@@ -226,36 +228,13 @@
                                 <button class="customPrevBtn"><i class="fas fa-chevron-left"></i></button>
                             </div>
                             <div id="latest_slider" class="latest-video-slider owl-carousel owl-theme">
+                            {% for i in latest_video %}
                                 <div class="item">
-                                    <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
+                                    <a href="https://www.youtube.com/embed/{{i.link}}">
+                                        <img src="{{i.poster}}" alt="">
                                     </a>
                                 </div>
-                                <div class="item">
-                                    <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
-                                    </a>
-                                </div>
+                            {% endfor %}
                             </div>
                         </div>
                     </div>

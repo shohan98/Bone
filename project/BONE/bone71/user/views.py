@@ -40,7 +40,8 @@ def user_video_player(request, pk):
         same_category_video_list.append({
                     'title': i.content_name,
                     'id': i.id,
-                    'poster': settings.MEDIA_URL+str(i.content_poster)
+                    'poster': settings.MEDIA_URL+str(i.content_poster),
+                    'link': i.content_link
                 })
 
     latest_video = YoutubeContent.objects.filter().order_by('created_at').reverse()
@@ -49,13 +50,17 @@ def user_video_player(request, pk):
         latest_video_list.append({
                     'title': i.content_name,
                     'id': i.id,
-                    'poster': settings.MEDIA_URL+str(i.content_poster)
+                    'poster': settings.MEDIA_URL+str(i.content_poster),
+                    'link': i.content_link
                 })
+        if len(latest_video_list)>=10:
+            break
 
     context = {'video_player':'active', 'categories':categories, 'c_len':len(categories),
            'youtube':video.content_link, 'title': video.content_name,
-           'desc':video.content_description, 
-           'similar_video': same_category_video_list}
+           'desc':video.content_description, 'views': video.total_click,
+           'similar_video': same_category_video_list,
+           'latest_video': latest_video_list}
     
     return render(request, 'video-player.html', context)
 #    except:
