@@ -40,7 +40,7 @@ class HorizontalAdWatchMonthlyReportAdmin(admin.ModelAdmin):
     search_fields = ['content', 'report_date']
 
 
-class VerticalBannerAdAdmin(admin.ModelAdmin):
+class VerticalBannerAdAdminMotion(admin.ModelAdmin):
     list_display = ['banner_name', 'target_link', 'total_watch', 'status',
                     'position', 'created_at']
     search_fields = ['banner_name', ]
@@ -68,7 +68,7 @@ admin.site.register(VideoAd, VideoAdAdmin)
 admin.site.register(VideoAdWatchMonthlyReport, VideoAdWatchMonthlyReportAdmin)
 admin.site.register(HorizontalBannerAd, HorizontalBannerAdAdmin)
 admin.site.register(HorizontalAdWatchMonthlyReport, HorizontalAdWatchMonthlyReportAdmin)
-admin.site.register(VerticalBannerAd, VerticalBannerAdAdmin)
+admin.site.register(VerticalBannerAd, VerticalBannerAdAdminMotion)
 admin.site.register(VerticalAdWatchMonthlyReport, VerticalAdWatchMonthlyReportAdmin)
 admin.site.register(ContentCategory, ContentCategoryAdmin)
 admin.site.register(ContentClickMonthlyReport, ContentClickMonthlyReportAdmin)

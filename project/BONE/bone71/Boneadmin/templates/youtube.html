@@ -22,6 +22,7 @@
                         <th class="video_image">Thumbnail</th>
                         <th class="video_name">name</th>
                         <th class="video_cateogry">Categoy</th>
+                        <th class="video_cateogry">Video Code</th>
                         <th class="video_action">Action</th>
                     </tr>
                     <tbody>
@@ -37,6 +38,9 @@
                             </td>
                             <td class="video_cateogry">
                                 <p>{{i.category}}</p>
+                            </td>
+                            <td class="video_cateogry">
+                                <p>{{i.content_link}}</p>
                             </td>
                             <td class="video_action">
                                 <a href="#" class="edit"><img src="{% static 'boneadmin/img/edit_icon.png' %}" alt=""></a>

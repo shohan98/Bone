@@ -7,9 +7,11 @@ from .forms import AdminSignUpForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from .decorators import admin_required
+from .decorators import admin_required, active_required
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 from .models import (YoutubeContent, ContentCategory, ContentClickMonthlyReport,
                      VerticalAdWatchMonthlyReport, VerticalBannerAd,
@@ -30,10 +32,10 @@ class test(ViewSet):
 
 
 class ContentDelete(ViewSet):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
     def post(self, request):
         c_id = request.POST.get('c_id')
-        print(c_id)
-        print(request.POST)
 #        try:
         data = YoutubeContent.objects.get(id=c_id)
         data.delete()
@@ -46,6 +48,100 @@ class ContentDelete(ViewSet):
     
     def list(self, request):
         return Response({'message':'Get method not allowed'}, 405)
+
+class CategoryDelete(ViewSet):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        c_id = request.POST.get('c_id')
+#        try:
+        data = ContentCategory.objects.get(id=c_id)
+        data.delete()
+        message="Delete Successfully"
+        status = 204
+#        except:
+#            status=404
+#            message="Delete Failed"
+        return Response({'message':message}, status)
+    
+    def list(self, request):
+        return Response({'message':'Get method not allowed'}, 405)
+
+class youtubeVideoDelete(ViewSet):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        c_id = request.POST.get('c_id')
+#        try:
+        data = YoutubeContent.objects.get(id=c_id)
+        data.delete()
+        message="Delete Successfully"
+        status = 204
+#        except:
+#            status=404
+#            message="Delete Failed"
+        return Response({'message':message}, status)
+    
+    def list(self, request):
+        return Response({'message':'Get method not allowed'}, 405)
+
+
+class VideoAdDelete(ViewSet):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        c_id = request.POST.get('c_id')
+#        try:
+        data = VideoAd.objects.get(id=c_id)
+        data.delete()
+        message="Delete Successfully"
+        status = 204
+#        except:
+#            status=404
+#            message="Delete Failed"
+        return Response({'message':message}, status)
+    
+    def list(self, request):
+        return Response({'message':'Get method not allowed'}, 405)
+
+
+class MotionAdDelete(ViewSet):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        c_id = request.POST.get('c_id')
+#        try:
+        data = VerticalBannerAd.objects.get(id=c_id)
+        data.delete()
+        message="Delete Successfully"
+        status = 204
+#        except:
+#            status=404
+#            message="Delete Failed"
+        return Response({'message':message}, status)
+    
+    def list(self, request):
+        return Response({'message':'Get method not allowed'}, 405)
+
+
+class BannerAdDelete(ViewSet):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        c_id = request.POST.get('c_id')
+#        try:
+        data = HorizontalBannerAd.objects.get(id=c_id)
+        data.delete()
+        message="Delete Successfully"
+        status = 204
+#        except:
+#            status=404
+#            message="Delete Failed"
+        return Response({'message':message}, status)
+    
+    def list(self, request):
+        return Response({'message':'Get method not allowed'}, 405)
+
 
 
 def csrf_failure(request, reason=""):
@@ -72,13 +168,14 @@ def signup(request):
 
 
 def admin_login(request):
+    message=''
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
+            print(username, password)
             user = authenticate(username=username, password=password)
-            print(user.is_admin)
             if user is not None:
                 if user.is_admin:
                     login(request, user)
@@ -86,19 +183,21 @@ def admin_login(request):
                 else:
                     return render(request, 'login.html', context={'form': AuthenticationForm(), 'message': 'This user is not an Admin!!'})
             else:
-                messages.error(request, "Invalid username or password")
+                message="Invalid username or password"
         else:
-            messages.error(request, "Invalid username or password")
-    return render(request, 'login.html', context={'form': AuthenticationForm()})
+            message="Invalid username or password"
+    return render(request, 'login.html', context={'form': AuthenticationForm(), 'message':message})
 
 @login_required
 @admin_required
+@active_required
 def admin_dashboard(request):
     context = {'dashboard':'active'}
     return render(request, 'dashboard.html', context)
 
 @login_required
 @admin_required
+@active_required
 def admin_bannerad(request):
     data=[]
     message=''
@@ -135,6 +234,7 @@ def admin_bannerad(request):
 
 @login_required
 @admin_required
+@active_required
 def admin_motionad(request):
     data=[]
     message=''
@@ -172,6 +272,7 @@ def admin_motionad(request):
 
 @login_required
 @admin_required
+@active_required
 def admin_videoad(request):
     data=[]
     message=''
@@ -206,6 +307,7 @@ def admin_videoad(request):
 
 @login_required
 @admin_required
+@active_required
 def admin_video_category(request):
     data=[]
     message=""
@@ -232,12 +334,14 @@ def admin_video_category(request):
 
 @login_required
 @admin_required
+@active_required
 def dashboard_base(request):
     
     return render(request, 'dashboard_base.html')
 
 @login_required
 @admin_required
+@active_required
 def admin_youtube(request):
     data=[]
     message=''
@@ -288,6 +392,7 @@ def admin_youtube(request):
 
 @login_required
 @admin_required
+@active_required
 def logout_view(request):
     logout(request)
     return redirect('boneadmin:login')

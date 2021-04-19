@@ -35,6 +35,7 @@
 
     <!-- top menu section  -->
     <div class="container-xl p-0">
+        {{message}}
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <a class="navbar-brand" href="index.html"><img src="{% static 'user/image/BONE-Logo.png' %}" alt=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +59,7 @@
                         <a class="nav-link" href="#" tabindex="-1" aria-disabled="true" data-toggle="modal" data-target="#signup-modal"><i class="fas fa-sign-out-alt"></i> Registration</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true" data-toggle="modal" data-target="#all-modal"> other modal</a>
+                        <a class="nav-link" href="{% url 'boneuser:logout' %}"> Logout</a>
                     </li>
                 </ul>
             </div>
@@ -494,14 +495,18 @@
                 <div class="modal-body">
                     <h3 class="modal-title">Login</h3>
                     <p>Login to your account</p>
-                    <form class="modal-form">
+                    <form class="modal-form" method="POST" action="{% url 'boneuser:index' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
                         <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" aria-describedby="username">
+                            <input type="hidden" class="form-control" id="username" aria-describedby="username" name="type" value="login" hidden>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" aria-describedby="email" name="email">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
                         </div>
                         <div class="form-group">
                             <div class="form-check form-check-inline">
@@ -532,21 +537,29 @@
                 <div class="modal-body">
                     <h3 class="modal-title">Sign Up</h3>
                     <p>Welcome to the Bone. Please register your account here.</p>
-                    <form class="modal-form">
+                    <form class="modal-form"  method="POST" action="{% url 'boneuser:index' %}" enctype="multipart/form-data" >
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="username" aria-describedby="username" name="type" value="signup" hidden>
+                        </div>
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" aria-describedby="username">
+                            <input type="text" class="form-control" id="username" aria-describedby="username" name="username">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="">
+                            <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="" name="email">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password2">
                         </div>
                         <button type="submit" class="btn btn-block btn-success">Sign Up</button>
-                        <p class="text-center mt-3">Already have an account? <a href="#">Sign In</a> here</p>
+                        <p class="text-center mt-3">Already have an account? <a href="#">LogIn</a> here</p>
                     </form>
                 </div>
             </div>

@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     is_admin = models.BooleanField(default=False)
     is_user = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     email = models.EmailField(unique=True)
 
 
