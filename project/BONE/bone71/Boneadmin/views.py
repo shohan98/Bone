@@ -358,6 +358,8 @@ def admin_youtube(request):
                                  content_link=content_link, category=category,
                                  content_description=desc, content_poster=file)
                 data.save()
+                category.total_video+=1
+                category.save()
                 message = "Conent Uploaded Successfully."
             except:
                 message = "File Uploaded Failed"

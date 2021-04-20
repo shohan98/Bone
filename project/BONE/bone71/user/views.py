@@ -84,18 +84,38 @@ def user_index(request):
                 message = str(form.errors)
         
     try:    
-        category = ContentCategory.objects.filter().order_by('total_video')[0]
-        video = YoutubeContent.objects.filter(category=category.id).order_by('total_click')
-        video_list=[]
-        for i in video:
-            video_list.append({
+        categories = ContentCategory.objects.filter()
+        
+        # Latest Video List
+        latest_video = YoutubeContent.objects.filter().order_by('created_at').reverse()
+        latest_video_list=[]
+        for i in latest_video:
+            latest_video_list.append({
                         'title': i.content_name,
                         'id': i.id,
-                        'poster': settings.MEDIA_URL+str(i.content_poster)
+                        'poster': settings.MEDIA_URL+str(i.content_poster),
+                        'link': i.content_link
                     })
+            if len(latest_video_list)>=10:
+                break
+    
+        #Most watched video list
+        most_watch_video = YoutubeContent.objects.filter().order_by('total_click').reverse()
+        most_watch_video_list=[]
+        for i in most_watch_video:
+            most_watch_video_list.append({
+                        'title': i.content_name,
+                        'id': i.id,
+                        'poster': settings.MEDIA_URL+str(i.content_poster),
+                        'link': i.content_link
+                    })
+            if len(most_watch_video_list)>=10:
+                break
     except:
         pass
-    context = {'form': AuthenticationForm(), 'index':'active', 'message': request.user}
+    context = {'form': AuthenticationForm(), 'index':'active', 
+               'message': request.user, 'most_watch':most_watch_video_list,
+               'latest_video': latest_video_list, 'categories': categories}
     return render(request, 'index.html', context)
 
 @login_required(login_url='/')
@@ -103,7 +123,14 @@ def user_index(request):
 #@user_required
 def user_video_player(request, pk):
     try:
+        # main video
         video = YoutubeContent.objects.get(id=pk)
+        video.total_click+=1
+        video.save()
+        video.category.total_click+=1
+        video.category.save()
+        
+        
         categories = ContentCategory.objects.filter()
         
         # Same Category video list
@@ -142,6 +169,7 @@ def user_video_player(request, pk):
                     })
             if len(most_watch_video_list)>=10:
                 break
+            
         context = {'video_player':'active', 'categories':categories, 'c_len':len(categories),
                'youtube':video.content_link, 'title': video.content_name,
                'desc':video.content_description, 'views': video.total_click,

@@ -32,7 +32,7 @@ class ContentCategory(models.Model):
 
 class YoutubeContent(models.Model):
     content_name = models.CharField(max_length=600)
-    content_description = models.CharField(max_length=3000, blank=True)
+    content_description = models.CharField(max_length=5000, blank=True)
     content_poster = models.ImageField(upload_to='Poster' ,blank=True)
     category = models.ForeignKey(ContentCategory, on_delete=models.CASCADE)
     content_link = models.CharField(max_length=600, unique=True)
