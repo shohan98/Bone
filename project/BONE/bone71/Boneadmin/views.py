@@ -143,7 +143,25 @@ class BannerAdDelete(ViewSet):
         return Response({'message':'Get method not allowed'}, 405)
 
 
-
+#class YoutubeSearch(ViewSet):
+#    authentication_classes = [SessionAuthentication, BasicAuthentication]
+#    permission_classes = [IsAuthenticated]
+#    def post(self, request):
+#        search_key = request.POST.get('search')
+##        try:
+#        data = YoutubeContent.objects.get(content_name)
+#        data.delete()
+#        message="Delete Successfully"
+#        status = 204
+##        except:
+##            status=404
+##            message="Delete Failed"
+#        return Response({'message':message}, status)
+#    
+#    def list(self, request):
+#        return Response({'message':'Get method not allowed'}, 405)
+    
+    
 def csrf_failure(request, reason=""):
     current_url = request.get_full_path()
     return redirect(current_url)
