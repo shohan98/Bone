@@ -11632,14 +11632,18 @@ form.user .form-control-user {
     padding: 1.5rem 1rem;
 }
 
-.btn-user {
+.btn-user-login {
     color: white;
     font-size: 0.8rem;
     padding: 15px 50px;
     border-color: transparent;
-    background: linear-gradient(200.19deg, #00D4FD 0%, #00AEFD 100%);
+    background: #2cad5d;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
+}
+
+.login_bg input {
+    border: 1px solid #2cad5d;
 }
 
 .btn-google {
