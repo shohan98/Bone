@@ -19,7 +19,7 @@
 
 <body class="login_bg">
     <div class="col-xl-3 col-lg-5 col-md-6 m-auto mt-5">
-    {{message}}
+        {{message}}
         <div class="card o-hidden border-0 shadow-lg">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
@@ -29,15 +29,16 @@
                         <h1 class="h4 text-gray-900 mt-3 mb-4">Login</h1>
                     </div>
                     <form class="user" method="POST" action="{% url 'boneadmin:login' %}">
-                    {% csrf_token %}
+                        {% csrf_token %}
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Username", name="username">
+                            <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Username" , name="username">
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password" , name="password">
                         </div>
                         <div class="form-group text-center">
-                                        <input type="submit", value="login"></input>
+                            <button type="submit" class="btn btn-success btn-primary btn-user">Login</button>
+                            <!-- <input type="submit" , value="login"></input> -->
                         </div>
                     </form>
                     <div class="text-center">
