@@ -68,7 +68,7 @@
                 <div class="row">
                     <div class="video-player-section">
                         <div class="row">
-                            <div class="col-lg-8 col-12">
+                            <div class="col-lg-8 col-12 single-video-section">
                                 <div class="video-container">
                                     <div class="ad-video-section">
                                         <video id="video" muted autoplay="true">
@@ -93,24 +93,25 @@
 
 
                             </div>
-                            <div class="col-lg-4 col-12">
+                            <div class="col-lg-4 col-12 recommended-videos-section">
                                 <div class="recommended-videos-container">
                                     <div class="recommended-heading">
                                         <h4 class="mb-0">Recommended Videos</h4>
                                     </div>
                                     <div class="recommended-videos">
+
+                                        {% for i in similar_video %}
                                         <div class="video-item">
-                                            {% for i in similar_video %}
                                             <div class="video-item-image">
                                                 <img src="{{i.poster}}" alt="">
                                             </div>
                                             <div class="video-item-details">
-                                                <a href="#" class="vi-movie-name">{{i.title}}</a>
+                                                <a href="javascript:void(0);" class="vi-movie-name">{{i.title}}</a>
                                                 <p class="mb-0"><i class="fas fa-eye mr-1" aria-hidden="true"></i> {{views}}</p>
-                                                <a href="https://www.youtube.com/embed/{{i.link}}" class="vi-movie-play"><img class="mr-2" src="{% static 'user/image/vi-play-btn.png' %}" alt="">Play Now</a>
+                                                <a href="#" class="vi-movie-play" video-id="{{i.id}}"><img class="mr-2" src="{% static 'user/image/vi-play-btn.png' %}" alt="">Play Now</a>
                                             </div>
-                                            {% endfor %}
                                         </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
@@ -167,6 +168,131 @@
                     </div>
                 </div>
                 <!-- category selection -->
+                <!-- category videos section  -->
+                <div class="row">
+                    <div class="container-xl category_selected_movies mb-5">
+                        <h4 class="text-white mb-3"><span class="selected_category">Category Name</span> <span class="selected_close"> <i class="fas fa-times-circle"></i></span></h4>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12 c_slider pl-0 mb-4">
+                                    <div class="owl-item">
+                                        <div class="item movie_poster" video-id="1">
+                                            <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
+                                            <div class="right_icon">
+                                                <a href="#">
+                                                    <span class="favourite_movie"><img src="{% static 'user/image/favourite.png' %}" alt=""></span>
+                                                </a>
+                                                <a href="#">
+                                                    <span class="share_movie"><img src="{% static 'user/image/share.png' %}" alt=""></span>
+                                                </a>
+                                            </div>
+                                            <a href="#">
+                                                <span class="movie_play_icon"><img src="{% static 'user/image/movie_play.png' %}" alt=""></span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12 c_slider pl-0 mb-4">
+                                    <div class="owl-item">
+                                        <div class="item movie_poster" video-id="1">
+                                            <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
+                                            <div class="right_icon">
+                                                <a href="#">
+                                                    <span class="favourite_movie"><img src="{% static 'user/image/favourite.png' %}" alt=""></span>
+                                                </a>
+                                                <a href="#">
+                                                    <span class="share_movie"><img src="{% static 'user/image/share.png' %}" alt=""></span>
+                                                </a>
+                                            </div>
+                                            <a href="#">
+                                                <span class="movie_play_icon"><img src="{% static 'user/image/movie_play.png' %}" alt=""></span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12 c_slider pl-0 mb-4">
+                                    <div class="owl-item">
+                                        <div class="item movie_poster" video-id="1">
+                                            <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
+                                            <div class="right_icon">
+                                                <a href="#">
+                                                    <span class="favourite_movie"><img src="{% static 'user/image/favourite.png' %}" alt=""></span>
+                                                </a>
+                                                <a href="#">
+                                                    <span class="share_movie"><img src="{% static 'user/image/share.png' %}" alt=""></span>
+                                                </a>
+                                            </div>
+                                            <a href="#">
+                                                <span class="movie_play_icon"><img src="{% static 'user/image/movie_play.png' %}" alt=""></span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12 c_slider pl-0 mb-4">
+                                    <div class="owl-item">
+                                        <div class="item movie_poster" video-id="1">
+                                            <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
+                                            <div class="right_icon">
+                                                <a href="#">
+                                                    <span class="favourite_movie"><img src="{% static 'user/image/favourite.png' %}" alt=""></span>
+                                                </a>
+                                                <a href="#">
+                                                    <span class="share_movie"><img src="{% static 'user/image/share.png' %}" alt=""></span>
+                                                </a>
+                                            </div>
+                                            <a href="#">
+                                                <span class="movie_play_icon"><img src="{% static 'user/image/movie_play.png' %}" alt=""></span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12 c_slider pl-0 mb-4">
+                                    <div class="owl-item">
+                                        <div class="item movie_poster" video-id="1">
+                                            <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
+                                            <div class="right_icon">
+                                                <a href="#">
+                                                    <span class="favourite_movie"><img src="{% static 'user/image/favourite.png' %}" alt=""></span>
+                                                </a>
+                                                <a href="#">
+                                                    <span class="share_movie"><img src="{% static 'user/image/share.png' %}" alt=""></span>
+                                                </a>
+                                            </div>
+                                            <a href="#">
+                                                <span class="movie_play_icon"><img src="{% static 'user/image/movie_play.png' %}" alt=""></span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12 c_slider pl-0 mb-4">
+                                    <div class="owl-item">
+                                        <div class="item movie_poster" video-id="1">
+                                            <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
+                                            <div class="right_icon">
+                                                <a href="#">
+                                                    <span class="favourite_movie"><img src="{% static 'user/image/favourite.png' %}" alt=""></span>
+                                                </a>
+                                                <a href="#">
+                                                    <span class="share_movie"><img src="{% static 'user/image/share.png' %}" alt=""></span>
+                                                </a>
+                                            </div>
+                                            <a href="#">
+                                                <span class="movie_play_icon"><img src="{% static 'user/image/movie_play.png' %}" alt=""></span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- category videos section  -->
                 <!-- most action section  -->
                 <div class="row mt-5">
                     <div class="container-xl categories_scroller_section">
@@ -222,13 +348,22 @@
                                 <button class="customPrevBtn"><i class="fas fa-chevron-left"></i></button>
                             </div>
                             <div id="latest_slider" class="latest-video-slider owl-carousel owl-theme">
-                            {% for i in latest_video %}
-                                <div class="item">
-                                    <a href="https://www.youtube.com/embed/{{i.link}}">
-                                        <img src="{{i.poster}}" alt="">
+                                {% for i in latest_video %}
+                                <div class="item movie_poster" video-id="{{i.id}}">
+                                    <img src="{{i.poster}}" alt="" class="item-img">
+                                    <div class="right_icon">
+                                        <a href="#">
+                                            <span class="favourite_movie"><img src="{% static 'user/image/favourite.png' %}" alt=""></span>
+                                        </a>
+                                        <a href="#">
+                                            <span class="share_movie"><img src="{% static 'user/image/share.png' %}" alt=""></span>
+                                        </a>
+                                    </div>
+                                    <a href="#">
+                                        <span class="movie_play_icon"><img src="{% static 'user/image/movie_play.png' %}" alt=""></span>
                                     </a>
                                 </div>
-                            {% endfor %}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -244,13 +379,22 @@
                                 <button class="customPrevBtn"><i class="fas fa-chevron-left"></i></button>
                             </div>
                             <div id="movie_slider" class="movie_slider owl-carousel owl-theme">
-                            {% for i in most_watch_video %}
-                                <div class="item">
-                                    <a href="https://www.youtube.com/embed/{{i.link}}">
-                                        <img src="{{i.poster}}" alt="">
+                                {% for i in most_watch_video %}
+                                <div class="item movie_poster" video-id="{{i.id}}">
+                                    <img src="{{i.poster}}" alt="" class="item-img">
+                                    <div class="right_icon">
+                                        <a href="#">
+                                            <span class="favourite_movie"><img src="{% static 'user/image/favourite.png' %}" alt=""></span>
+                                        </a>
+                                        <a href="#">
+                                            <span class="share_movie"><img src="{% static 'user/image/share.png' %}" alt=""></span>
+                                        </a>
+                                    </div>
+                                    <a href="#">
+                                        <span class="movie_play_icon"><img src="{% static 'user/image/movie_play.png' %}" alt=""></span>
                                     </a>
                                 </div>
-                            {% endfor %}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -268,32 +412,32 @@
                             <div id="Top_Regeional_slider" class="Top_Regeional_slider owl-carousel owl-theme">
                                 <div class="item">
                                     <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
                                     </a>
                                 </div>
                                 <div class="item">
                                     <a href="#">
-                                        <img src="{% static 'user/image/latest1.png' %}" alt="">
+                                        <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
                                     </a>
                                 </div>
                             </div>

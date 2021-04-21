@@ -113,8 +113,12 @@ def user_index(request):
                 break
     except:
         pass
+    if request.user.is_authenticated:
+        login=True
+    else:
+        login=False
     context = {'form': AuthenticationForm(), 'index':'active', 
-               'message': request.user, 'most_watch':most_watch_video_list,
+               'message': message , 'user':request.user, 'login':login, 'most_watch':most_watch_video_list,
                'latest_video': latest_video_list, 'categories': categories}
     return render(request, 'index.html', context)
 

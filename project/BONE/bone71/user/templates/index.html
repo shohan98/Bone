@@ -52,15 +52,33 @@
                             </div>
                         </div>
                     </li>
+                    {% if login %}
+                    <!-- <li class="nav-item">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-user-circle mr-2"></i> {{user}}
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="{% url 'boneuser:logout' %}">Logout</button>
+                            </div>
+                        </div>
+                    </li> -->
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"> <b><i class="fas fa-user-circle mr-2"></i> {{user}}</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'boneuser:logout' %}"> Logout</a>
+                    </li>
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="#" tabindex="-1" aria-disabled="true" data-toggle="modal" data-target="#login-modal"><i class="fas fa-sign-out-alt"></i> Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" tabindex="-1" aria-disabled="true" data-toggle="modal" data-target="#signup-modal"><i class="fas fa-sign-out-alt"></i> Registration</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'boneuser:logout' %}"> Logout</a>
-                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
@@ -72,7 +90,7 @@
         <div class="row">
             <div class="col-12 p-0">
                 <div id="hero_slider" class="hero-slider owl-carousel owl-theme">
-                {% for i in latest_video %}
+                    {% for i in latest_video %}
                     <div class="col-12 slider_content p-0">
                         <img class="hero_img" src="{{i.poster}}" alt="">
                         <div class="container">
@@ -93,8 +111,8 @@
                             </div>
                         </div>
                     </div>
-                {% endfor %}
-                    
+                    {% endfor %}
+
 
                 </div>
                 <div class="owl-dots custom-dot" id="carousel-custom-dots">
@@ -154,6 +172,134 @@
                     </div>
                 </div>
                 <!-- category selection -->
+
+                <!-- category videos section  -->
+                <div class="row">
+                    <div class="container-xl category_selected_movies mb-5">
+                        <h4 class="text-white mb-3"><span class="selected_category">Category Name</span> <span class="selected_close"> <i class="fas fa-times-circle"></i></span></h4>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12 c_slider pl-0 mb-4">
+                                    <div class="owl-item">
+                                        <div class="item movie_poster" video-id="1">
+                                            <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
+                                            <div class="right_icon">
+                                                <a href="#">
+                                                    <span class="favourite_movie"><img src="{% static 'user/image/favourite.png' %}" alt=""></span>
+                                                </a>
+                                                <a href="#">
+                                                    <span class="share_movie"><img src="{% static 'user/image/share.png' %}" alt=""></span>
+                                                </a>
+                                            </div>
+                                            <a href="#">
+                                                <span class="movie_play_icon"><img src="{% static 'user/image/movie_play.png' %}" alt=""></span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12 c_slider pl-0 mb-4">
+                                    <div class="owl-item">
+                                        <div class="item movie_poster" video-id="1">
+                                            <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
+                                            <div class="right_icon">
+                                                <a href="#">
+                                                    <span class="favourite_movie"><img src="{% static 'user/image/favourite.png' %}" alt=""></span>
+                                                </a>
+                                                <a href="#">
+                                                    <span class="share_movie"><img src="{% static 'user/image/share.png' %}" alt=""></span>
+                                                </a>
+                                            </div>
+                                            <a href="#">
+                                                <span class="movie_play_icon"><img src="{% static 'user/image/movie_play.png' %}" alt=""></span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12 c_slider pl-0 mb-4">
+                                    <div class="owl-item">
+                                        <div class="item movie_poster" video-id="1">
+                                            <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
+                                            <div class="right_icon">
+                                                <a href="#">
+                                                    <span class="favourite_movie"><img src="{% static 'user/image/favourite.png' %}" alt=""></span>
+                                                </a>
+                                                <a href="#">
+                                                    <span class="share_movie"><img src="{% static 'user/image/share.png' %}" alt=""></span>
+                                                </a>
+                                            </div>
+                                            <a href="#">
+                                                <span class="movie_play_icon"><img src="{% static 'user/image/movie_play.png' %}" alt=""></span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12 c_slider pl-0 mb-4">
+                                    <div class="owl-item">
+                                        <div class="item movie_poster" video-id="1">
+                                            <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
+                                            <div class="right_icon">
+                                                <a href="#">
+                                                    <span class="favourite_movie"><img src="{% static 'user/image/favourite.png' %}" alt=""></span>
+                                                </a>
+                                                <a href="#">
+                                                    <span class="share_movie"><img src="{% static 'user/image/share.png' %}" alt=""></span>
+                                                </a>
+                                            </div>
+                                            <a href="#">
+                                                <span class="movie_play_icon"><img src="{% static 'user/image/movie_play.png' %}" alt=""></span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12 c_slider pl-0 mb-4">
+                                    <div class="owl-item">
+                                        <div class="item movie_poster" video-id="1">
+                                            <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
+                                            <div class="right_icon">
+                                                <a href="#">
+                                                    <span class="favourite_movie"><img src="{% static 'user/image/favourite.png' %}" alt=""></span>
+                                                </a>
+                                                <a href="#">
+                                                    <span class="share_movie"><img src="{% static 'user/image/share.png' %}" alt=""></span>
+                                                </a>
+                                            </div>
+                                            <a href="#">
+                                                <span class="movie_play_icon"><img src="{% static 'user/image/movie_play.png' %}" alt=""></span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12 c_slider pl-0 mb-4">
+                                    <div class="owl-item">
+                                        <div class="item movie_poster" video-id="1">
+                                            <img src="{% static 'user/image/latest1.png' %}" alt="" class="item-img">
+                                            <div class="right_icon">
+                                                <a href="#">
+                                                    <span class="favourite_movie"><img src="{% static 'user/image/favourite.png' %}" alt=""></span>
+                                                </a>
+                                                <a href="#">
+                                                    <span class="share_movie"><img src="{% static 'user/image/share.png' %}" alt=""></span>
+                                                </a>
+                                            </div>
+                                            <a href="#">
+                                                <span class="movie_play_icon"><img src="{% static 'user/image/movie_play.png' %}" alt=""></span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- category videos section  -->
+
+
                 <!-- latest section  -->
                 <div class="row">
                     <div class="container-xl categories_scroller_section">
@@ -164,7 +310,7 @@
                                 <button class="customPrevBtn"><i class="fas fa-chevron-left"></i></button>
                             </div>
                             <div id="latest_slider" class="latest-video-slider owl-carousel owl-theme">
-                            {% for i in latest_video %}
+                                {% for i in latest_video %}
                                 <div class="item movie_poster" video-id="{{i.id}}">
                                     <img src="{{i.poster}}" alt="" class="item-img">
                                     <div class="right_icon">
@@ -179,8 +325,8 @@
                                         <span class="movie_play_icon"><img src="{% static 'user/image/movie_play.png' %}" alt=""></span>
                                     </a>
                                 </div>
-                            {% endfor %}
-                                
+                                {% endfor %}
+
                             </div>
                         </div>
                     </div>
@@ -196,7 +342,7 @@
                                 <button class="customPrevBtn"><i class="fas fa-chevron-left"></i></button>
                             </div>
                             <div id="movie_slider" class="movie_slider owl-carousel owl-theme">
-                            {% for i in most_watch %}
+                                {% for i in most_watch %}
                                 <div class="item movie_poster" video-id="{{i.id}}">
                                     <img src="{{i.poster}}" alt="" class="item-img">
                                     <div class="right_icon">
@@ -211,7 +357,7 @@
                                         <span class="movie_play_icon"><img src="{% static 'user/image/movie_play.png' %}" alt=""></span>
                                     </a>
                                 </div>
-                            {% endfor %}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -336,8 +482,8 @@
                             <input type="email" class="form-control" id="email" aria-describedby="email" name="email">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
                         </div>
                         <div class="form-group">
                             <div class="form-check form-check-inline">
@@ -368,7 +514,7 @@
                 <div class="modal-body">
                     <h3 class="modal-title">Sign Up</h3>
                     <p>Welcome to the Bone. Please register your account here.</p>
-                    <form class="modal-form"  method="POST" action="{% url 'boneuser:index' %}" enctype="multipart/form-data" >
+                    <form class="modal-form signup-form" method="POST" action="{% url 'boneuser:index' %}" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="username" aria-describedby="username" name="type" value="signup" hidden>
@@ -382,14 +528,23 @@
                             <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="" name="email">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" name="password1">
+                            <label for="reg-password">Password</label>
+                            <input type="password" class="form-control" id="reg-password" name="password1">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" name="password2">
+                            <label for="confirm-password">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirm-password" name="password2">
                         </div>
-                        <button type="submit" class="btn btn-block btn-success">Sign Up</button>
+                        <div class="alert alert-info" role="alert">
+                            <ul class="mb-0">
+                                <li>Password should be minimum 8 word</li>
+                                <li>Password shouldn't be too similar to the username.</li>
+                            </ul>
+                        </div>
+                        <div class="alert alert-danger password-alert" role="alert">
+
+                        </div>
+                        <button type="submit" class="btn btn-block btn-success btn-signup">Sign Up</button>
                         <p class="text-center mt-3">Already have an account? <a href="#">LogIn</a> here</p>
                     </form>
                 </div>

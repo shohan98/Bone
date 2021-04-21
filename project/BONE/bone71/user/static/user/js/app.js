@@ -199,11 +199,10 @@ $(document).ready(function() {
     });
 
     // video and ad render to another page 
-    $('.movie_poster').click(function() {
-        id = $(this).attr('video-id');
-        mainVideoUrl = $(this).attr('main-video-url');
-        // window.location.href = 'video' + '/' + id;
-        window.location.href = 'video';
+    $('.movie_poster,.vi-movie-play').click(function() {
+        var id = $(this).attr('video-id');
+        var url = window.location.origin;
+        window.location.href = url + "/video" + '/' + id;
     });
     // video and ad render to another page 
 
@@ -220,4 +219,72 @@ $(document).ready(function() {
             $('.main-video-section iframe').attr('src', src + '?autoplay=1')
         });
     }
+    $('.signup-form').submit(function() {
+        console.log('submit');
+        var password = $('#reg-password').val();
+        var confirmPass = $('#confirm-password').val();
+        if (password.length < 8) {
+            console.log(password.length)
+            $('.password-alert').text('Check password requirments');
+            $('.password-alert').show();
+            setTimeout(function() {
+                $('.password-alert').hide();
+            }, 5000);
+            return false;
+        }
+        if (password != confirmPass) {
+            console.log(password, confirmPass);
+            console.log('password not matched');
+            $('.password-alert').text("Password didn't matched");
+            $('.password-alert').show();
+            setTimeout(function() {
+                $('.password-alert').hide();
+            }, 5000);
+            return false;
+        }
+    });
+    $('.selected_close').click(function() {
+        $(this).closest('.category_selected_movies').hide();
+        // $(this).closest('.c_slider').remove();
+        // console.log($(this).closest('.category_selected_movies .c_slider'))
+    });
+    showMore();
+    console.log()
+    var leftHeight = $('.single-video-section').height();
+    $('.recommended-videos-section').height(leftHeight);
 });
+
+
+function showMore() {
+    var showChar = 300;
+    var ellipsestext = "...";
+    var moretext = "more";
+    var lesstext = "less";
+    $('.video-description p').each(function() {
+        var content = $(this).html();
+
+        if (content.length > showChar) {
+
+            var c = content.substr(0, showChar);
+            var h = content.substr(showChar - 1, content.length - showChar);
+
+            var html = c + '<span class="moreellipses">' + ellipsestext + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+
+            $(this).html(html);
+        }
+
+    });
+
+    $(".morelink").click(function() {
+        if ($(this).hasClass("less")) {
+            $(this).removeClass("less");
+            $(this).html(moretext);
+        } else {
+            $(this).addClass("less");
+            $(this).html(lesstext);
+        }
+        $(this).parent().prev().toggle();
+        $(this).prev().toggle();
+        return false;
+    });
+}

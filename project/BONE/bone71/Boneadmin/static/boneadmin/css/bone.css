@@ -12218,10 +12218,11 @@ textarea {
 }
 
 .video_name {
-    width: 60%;
+    /* width: 60%; */
 }
 
 .video_image img {
+    height: 50px;
     width: 100%;
 }
 
