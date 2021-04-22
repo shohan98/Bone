@@ -210,7 +210,10 @@ def admin_login(request):
 @admin_required
 @active_required
 def admin_dashboard(request):
-    context = {'dashboard':'active'}
+    youtube_video = YoutubeContent.objects.filter().count()
+    total_user = User.objects.filter().count()
+    context = {'dashboard':'active', 'total_user':total_user,
+               'total_video': youtube_video}
     return render(request, 'dashboard.html', context)
 
 @login_required
@@ -344,7 +347,9 @@ def admin_video_category(request):
     for i in videos:
         Videoad_list.append({
                     'id': i.id,
-                    'category_name': i.category_name
+                    'category_name': i.category_name,
+                    'total_click': i.total_click,
+                    'total_video': i.total_video
                 })
     data = Videoad_list
     context = {'video_category':'active', 'data':data, 'message':message}

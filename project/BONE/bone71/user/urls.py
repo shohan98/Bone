@@ -4,7 +4,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from .views import (user_index, user_video_player,logout_view)
-from .views import (test, Signup)
+from .views import (test, Signup, CategoryContent)
 
 #from.views import (ContentDelete,)
 app_name = 'boneuser'
@@ -12,7 +12,7 @@ app_name = 'boneuser'
 router = DefaultRouter()
 
 router.register('test', test, basename='test' )
-router.register('signup', Signup, basename='signup' )
+router.register('categorycontent', CategoryContent, basename='categorycontent' )
 
 
 urlpatterns = [

@@ -20,6 +20,8 @@
                     <tr>
                         <th class="ad_image">Thumbnail</th>
                         <th class="ad_name">Ad Type</th>
+                        <th class="video_action">Total Watch</th>
+                        <th class="video_action">Total Click</th>
                         <th class="video_action">Action</th>
                     </tr>
                     <tbody>
@@ -32,7 +34,15 @@
                             </td>
                             <td class="ad_name">
                                 <p class="mb-0">{{i.banner_name}}</p>
-                                <p class="ad_position mb-0">Vertical | left</p>
+                                {% if i.status %}
+                                    <p class="ad_position mb-0">{{i.position}}</p>
+                                {% endif %}
+                            </td>
+                            <td class="ad_name">
+                                <p class="mb-0">{{i.total_watch}}</p>
+                            </td>
+                            <td class="ad_name">
+                                <p class="mb-0">{{i.total_click}}</p>
                             </td>
                             <td class="video_action">
                                 <a href="#" class="edit"><img src="{% static 'boneadmin/img/edit_icon.png' %}" alt=""></a>

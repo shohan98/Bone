@@ -52,7 +52,7 @@ class VerticalAdWatchMonthlyReportAdmin(admin.ModelAdmin):
 
 
 class ContentCategoryAdmin(admin.ModelAdmin):
-    list_display = ['category_name', 'total_video', 'total_click']
+    list_display = ['id', 'category_name', 'total_video', 'total_click']
     search_fields = ['category_name', ]
 
 

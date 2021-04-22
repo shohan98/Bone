@@ -46,7 +46,32 @@ class Signup(ViewSet):
         return Response({'msg': message})
 
 
-
+class CategoryContent(ViewSet):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        category = request.POST.get('category')
+        video_list=[]   
+        try:
+            data = YoutubeContent.objects.get(category=category)
+            video_list=[]
+            for i in data:
+                video_list.append({
+                        'title': i.content_name,
+                        'id': i.id,
+                        'poster': settings.MEDIA_URL+str(i.content_poster),
+                        'link': i.content_link
+                    })
+                if len(video_list)>=12:
+                    break
+            status = 200
+        except:
+            status=404
+        return Response({'video':video_list}, status)
+    
+    def list(self, request):
+        return Response({'message':'Get method not allowed'}, 405)
+    
 def user_index(request):
     message=''
     if request.method == 'POST':

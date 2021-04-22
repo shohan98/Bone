@@ -62,6 +62,7 @@ class VerticalBannerAd(models.Model):
     banner = models.FileField(upload_to='VBanner')
     target_link = models.URLField(null=True)
     total_watch = models.IntegerField(default=0)
+    total_click = models.IntegerField(default=0)
     status = models.BooleanField(default=True)
     position = models.IntegerField(default=0)
     added_by_ip = models.CharField(max_length=25)
@@ -76,6 +77,7 @@ class HorizontalBannerAd(models.Model):
     banner = models.FileField(upload_to='HBanner')
     target_link = models.URLField(null=True)
     total_watch = models.IntegerField(default=0)
+    total_click = models.IntegerField(default=0)
     status = models.BooleanField(default=True)
     position = models.IntegerField(default=0)
     added_by_ip = models.CharField(max_length=25)
@@ -88,6 +90,7 @@ class HorizontalBannerAd(models.Model):
 class ContentClickMonthlyReport(models.Model):
     content = models.ForeignKey(YoutubeContent, on_delete=models.CASCADE)
     report_date = models.CharField(max_length=30)
+    total_watch = models.IntegerField(default=0)
     total_click = models.IntegerField(default=0)
     created_at = models.DateTimeField(default=tz.now)
 
