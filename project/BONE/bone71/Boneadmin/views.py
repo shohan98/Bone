@@ -1,18 +1,23 @@
+import json
+
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet, GenericViewSet
-from .forms import AdminSignUpForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from .decorators import admin_required, active_required
 from django.conf import settings
-from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse
+from django.db.models import Q
+from django.core.paginator import Paginator
+
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 
+from .forms import AdminSignUpForm
+from .decorators import admin_required, active_required
 from .models import (YoutubeContent, ContentCategory, ContentClickMonthlyReport,
                      VerticalAdWatchMonthlyReport, VerticalBannerAd,
                      HorizontalAdWatchMonthlyReport, HorizontalBannerAd,
@@ -30,6 +35,15 @@ class test(ViewSet):
     def list(self, request):
         return Response({'ok': 'ok'})
 
+def page_data(request, data,per_page_value):
+    try:
+        paginator = Paginator(data, per_page_value)  # Show 25 contacts per page
+        page = request.GET.get('page')
+        if not page:
+            page = request.POST.get('page')    
+        return paginator.get_page(page)
+    except:
+        return data
 
 class ContentDelete(ViewSet):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
@@ -223,25 +237,84 @@ def admin_bannerad(request):
     data=[]
     message=''
     if request.method == 'POST':
-        banner_name = request.POST.get('name')
-        target_link = request.POST.get('link')
-        file = request.FILES['banner']
-        try:
+        req_type = request.POST.get('req_type')
+        if req_type=='add_horizontalad':
+            banner_name = request.POST.get('name')
+            target_link = request.POST.get('link')
+            file = request.FILES['banner']
             try:
-                data = HorizontalBannerAd.objects.create(banner_name=banner_name, 
-                                 target_link=target_link, banner=file)
-                data.save()
-                message = "Conent Uploaded Successfully."
+                try:
+                    data = HorizontalBannerAd.objects.create(banner_name=banner_name, 
+                                     target_link=target_link, banner=file)
+                    data.save()
+                    message = "Conent Uploaded Successfully."
+                except:
+                    message = "File Uploaded Failed"
             except:
-                message = "File Uploaded Failed"
-        except:
-            message = "Please Select Valid Category"
-
+                message = "Please Select Valid Category"
+        elif req_type=='search':
+            key = request.POST.get('key')
+            category = request.POST.get('category')
+            try:
+                video_data = HorizontalBannerAd.objects.get_queryset().order_by('created_at').reverse()
+                if key:
+                    search_data = video_data.filter(
+                        Q(banner_name__icontains=key)
+                        
+                    ).distinct()
+                     
+                    video_data=search_data
+                video_data =  page_data(request, video_data, 25)
+                
+                page_value = {}
+                page_value['has_previous'] = video_data.has_previous()
+                page_value['has_next'] = video_data.has_next()
+                page_value['num_pages'] = video_data.paginator.num_pages
+                page_value['number'] = video_data.number
+                if page_value['has_previous']:
+                    page_value['previous_page_number'] = video_data.previous_page_number()
+                if page_value['has_next']:
+                    page_value['next_page_number'] = video_data.next_page_number()
+    
+                context = {
+                    'object_list':page_value,
+                    'video_data': video_data,
+                    'status': 200,
+                    'video_search': key,
+                    'category': category
+                }
+                return HttpResponse(
+                        json.dumps(context),
+                        content_type="application/json"
+                    )
+            except:
+                context = {
+                    'object_list':'',
+                    'video_data': '',
+                    'status': 404,
+                    'video_search': key,
+                    'category': category
+                }
+                return HttpResponse(
+                        json.dumps(context),
+                        content_type="application/json"
+                    )
 # Load all other elements
-    videos = HorizontalBannerAd.objects.all()
-#        videos = YoutubeContentSerializer(videos, many=True)
+    Hbanner = HorizontalBannerAd.objects.all()
+    hbanner_data =  page_data(request, Hbanner, 25)
+                
+    page_value = {}
+    page_value['has_previous'] = hbanner_data.has_previous()
+    page_value['has_next'] = hbanner_data.has_next()
+    page_value['num_pages'] = hbanner_data.paginator.num_pages
+    page_value['number'] = hbanner_data.number
+    if page_value['has_previous']:
+        page_value['previous_page_number'] = hbanner_data.previous_page_number()
+    if page_value['has_next']:
+        page_value['next_page_number'] = hbanner_data.next_page_number()
+            
     hbanner_list = []
-    for i in videos:
+    for i in hbanner_data:
         hbanner_list.append({
                     'id': i.id,
                     'banner_name': i.banner_name,
@@ -250,7 +323,10 @@ def admin_bannerad(request):
                     'status': i.status
                 })
     data = hbanner_list
-    context = {'bannerad':'active', 'data':data, 'message':message}
+    context = {'bannerad':'active', 
+               'data':data, 
+               'message':message,
+               'object_list':page_value}
     return render(request, 'banner_ad.html', context)
 
 @login_required
@@ -260,25 +336,83 @@ def admin_motionad(request):
     data=[]
     message=''
     if request.method == 'POST':
-        banner_name = request.POST.get('name')
-        target_link = request.POST.get('link')
-        file = request.FILES['banner']
-        try:
+        req_type = request.POST.get('req_type')
+        if req_type=='add_verticalad':
+            banner_name = request.POST.get('name')
+            target_link = request.POST.get('link')
+            file = request.FILES['banner']
             try:
-                data = VerticalBannerAd.objects.create(banner_name=banner_name, 
-                                 target_link=target_link, banner=file)
-                data.save()
-                message = "Conent Uploaded Successfully."
+                try:
+                    data = VerticalBannerAd.objects.create(banner_name=banner_name, 
+                                     target_link=target_link, banner=file)
+                    data.save()
+                    message = "Conent Uploaded Successfully."
+                except:
+                    message = "File Uploaded Failed"
             except:
-                message = "File Uploaded Failed"
-        except:
-            message = "Please Select Valid Category"
-
+                message = "Please Select Valid Category"
+        elif req_type=='search':
+            key = request.POST.get('key')
+            category = request.POST.get('category')
+            try:
+                video_data = VerticalBannerAd.objects.get_queryset().filter().reverse()
+                if key:
+                    search_data = video_data.filter(
+                        Q(banner_name__icontains=key)
+                        
+                    ).distinct()
+                    video_data=search_data
+                video_data =  page_data(request, video_data, 25)
+                
+                page_value = {}
+                page_value['has_previous'] = video_data.has_previous()
+                page_value['has_next'] = video_data.has_next()
+                page_value['num_pages'] = video_data.paginator.num_pages
+                page_value['number'] = video_data.number
+                if page_value['has_previous']:
+                    page_value['previous_page_number'] = video_data.previous_page_number()
+                if page_value['has_next']:
+                    page_value['next_page_number'] = video_data.next_page_number()
+    
+                context = {
+                    'object_list':page_value,
+                    'video_data': video_data,
+                    'status': 200,
+                    'video_search': key,
+                    'category': category
+                }
+                return HttpResponse(
+                        json.dumps(context),
+                        content_type="application/json"
+                    )
+            except:
+                context = {
+                    'object_list':'',
+                    'video_data': '',
+                    'status': 404,
+                    'video_search': key,
+                    'category': category
+                }
+                return HttpResponse(
+                        json.dumps(context),
+                        content_type="application/json"
+                    )
 # Load all other elements
-    videos = VerticalBannerAd.objects.all()
-#        videos = YoutubeContentSerializer(videos, many=True)
+    Vbanner = VerticalBannerAd.objects.all()
+    vbanner_data =  page_data(request, Vbanner, 25)
+                
+    page_value = {}
+    page_value['has_previous'] = vbanner_data.has_previous()
+    page_value['has_next'] = vbanner_data.has_next()
+    page_value['num_pages'] = vbanner_data.paginator.num_pages
+    page_value['number'] = vbanner_data.number
+    if page_value['has_previous']:
+        page_value['previous_page_number'] = vbanner_data.previous_page_number()
+    if page_value['has_next']:
+        page_value['next_page_number'] = vbanner_data.next_page_number()
+            
     hbanner_list = []
-    for i in videos:
+    for i in vbanner_data:
         hbanner_list.append({
                     'id': i.id,
                     'banner_name': i.banner_name,
@@ -287,7 +421,10 @@ def admin_motionad(request):
                     'status': i.status
                 })
     data = hbanner_list
-    context = {'bannerad':'active', 'data':data, 'message':message}
+    context = {'bannerad':'active', 
+               'data':data, 
+               'message':message,
+               'object_list':page_value}
     return render(request, 'motion_ad.html', context)
 
 
@@ -298,24 +435,84 @@ def admin_videoad(request):
     data=[]
     message=''
     if request.method == 'POST':
-        video_name = request.POST.get('name')
-        file = request.FILES['video']
-        try:
+        req_type = request.POST.get('req_type')
+        if req_type=='add_videoad':
+            video_name = request.POST.get('name')
+            file = request.FILES['video']
             try:
-                data = VideoAd.objects.create(video_name=video_name, 
-                                 video=file)
-                data.save()
-                message = "Conent Uploaded Successfully."
+                try:
+                    data = VideoAd.objects.create(video_name=video_name, 
+                                     video=file)
+                    data.save()
+                    message = "Conent Uploaded Successfully."
+                except:
+                    message = "File Uploaded Failed"
             except:
-                message = "File Uploaded Failed"
-        except:
-            message = "Please Select Valid Category"
+                message = "Please Select Valid Category"
+        elif req_type=='search':
+            key = request.POST.get('key')
+            category = request.POST.get('category')
+            try:
+                video_data = VideoAd.objects.get_queryset().order_by('created_at').reverse()
+                if key:
+                    search_data = video_data.filter(
+                        Q(video_name__icontains=key)
+                        
+                    ).distinct()
+                    video_data=search_data
+                video_data =  page_data(request, video_data, 25)
+                
+                page_value = {}
+                page_value['has_previous'] = video_data.has_previous()
+                page_value['has_next'] = video_data.has_next()
+                page_value['num_pages'] = video_data.paginator.num_pages
+                page_value['number'] = video_data.number
+                if page_value['has_previous']:
+                    page_value['previous_page_number'] = video_data.previous_page_number()
+                if page_value['has_next']:
+                    page_value['next_page_number'] = video_data.next_page_number()
+    
+                context = {
+                    'object_list':page_value,
+                    'video_data': video_data,
+                    'status': 200,
+                    'video_search': key,
+                    'category': category
+                }
+                return HttpResponse(
+                        json.dumps(context),
+                        content_type="application/json"
+                    )
+            except:
+                context = {
+                    'object_list':'',
+                    'video_data': '',
+                    'status': 404,
+                    'video_search': key,
+                    'category': category
+                }
+                return HttpResponse(
+                        json.dumps(context),
+                        content_type="application/json"
+                    )
 
 # Load all other elements
     videos = VideoAd.objects.all()
-#        videos = YoutubeContentSerializer(videos, many=True)
+    video_data =  page_data(request, videos, 25)
+                
+    page_value = {}
+    page_value['has_previous'] = video_data.has_previous()
+    page_value['has_next'] = video_data.has_next()
+    page_value['num_pages'] = video_data.paginator.num_pages
+    page_value['number'] = video_data.number
+    if page_value['has_previous']:
+        page_value['previous_page_number'] = video_data.previous_page_number()
+    if page_value['has_next']:
+        page_value['next_page_number'] = video_data.next_page_number()
+            
     hbanner_list = []
-    for i in videos:
+    
+    for i in video_data:
         hbanner_list.append({
                     'id': i.id,
                     'video_name': i.video_name,
@@ -323,7 +520,10 @@ def admin_videoad(request):
                     'status': i.status
                 })
     data = hbanner_list
-    context = {'bannerad':'active', 'data':data, 'message':message}
+    context = {'bannerad':'active', 
+               'data':data, 
+               'message':message,
+               'object_list':page_value}
     return render(request, 'video_ad.html', context)
 
 @login_required
@@ -369,34 +569,106 @@ def admin_youtube(request):
     data=[]
     message=''
     if request.method == 'POST':
-        content_name = request.POST.get('name')
-        content_link = request.POST.get('link')
-        category = request.POST.get('video_category')
-        desc = request.POST.get('desc')
-        file = request.FILES['poster']
-        try:
-            category = ContentCategory.objects.get(id=category)
+        req_type = request.POST.get('req_type')
+        if req_type=='add_video':
+            content_name = request.POST.get('name')
+            content_link = request.POST.get('link')
+            category = request.POST.get('video_category')
+            desc = request.POST.get('desc')
+            
             try:
-                data = YoutubeContent.objects.create(content_name=content_name, 
-                                 content_link=content_link, category=category,
-                                 content_description=desc, content_poster=file)
-                data.save()
-                category.total_video+=1
-                category.save()
-                message = "Conent Uploaded Successfully."
+                file = request.FILES['poster']
+                category = ContentCategory.objects.get(id=category)
+                try:
+                    data = YoutubeContent.objects.create(content_name=content_name, 
+                                     content_link=content_link, category=category,
+                                     content_description=desc, content_poster=file)
+                    data.save()
+                    category.total_video+=1
+                    category.save()
+                    message = "Conent Uploaded Successfully."
+                except:
+                    message = "File Uploaded Failed"
             except:
-                message = "File Uploaded Failed"
-        except:
-            message = "Please Select Valid Category"
+                message = "Please Select Valid Category"
+        elif req_type=='search':
+            key = request.POST.get('key')
+            category = request.POST.get('category')
+            try:
+                if category:
+                    video_data = YoutubeContent.objects.get_queryset().filter(
+                            category=category).reverse()
+                else:
+                    video_data = YoutubeContent.objects.get_queryset().order_by('created_at').reverse()
+                if key:
+                    search_data = video_data.filter(
+                        Q(content_name__icontains=key)
+                        
+                    ).distinct()
+                    if len(search_data)==0:
+                        search_data = video_data.filter(
+                            Q(content_description__icontains=key)
+                            
+                        ).distinct() 
+                    video_data=search_data
+                video_data =  page_data(request, video_data, 25)
+                
+                page_value = {}
+                page_value['has_previous'] = video_data.has_previous()
+                page_value['has_next'] = video_data.has_next()
+                page_value['num_pages'] = video_data.paginator.num_pages
+                page_value['number'] = video_data.number
+                if page_value['has_previous']:
+                    page_value['previous_page_number'] = video_data.previous_page_number()
+                if page_value['has_next']:
+                    page_value['next_page_number'] = video_data.next_page_number()
+    
+                context = {
+                    'object_list':page_value,
+                    'video_data': video_data,
+                    'status': 200,
+                    'video_search': key,
+                    'category': category
+                }
+                return HttpResponse(
+                        json.dumps(context),
+                        content_type="application/json"
+                    )
+            except:
+                context = {
+                    'object_list':'',
+                    'video_data': '',
+                    'status': 404,
+                    'video_search': key,
+                    'category': category
+                }
+                return HttpResponse(
+                        json.dumps(context),
+                        content_type="application/json"
+                    )
+
 
 # Load all other elements
             
     videos = YoutubeContent.objects.all().order_by('created_at').reverse()
     category = ContentCategory.objects.all().order_by('created_at').reverse()
 #        videos = YoutubeContentSerializer(videos, many=True)
+    
+    video_data =  page_data(request, videos, 25)
+                
+    page_value = {}
+    page_value['has_previous'] = video_data.has_previous()
+    page_value['has_next'] = video_data.has_next()
+    page_value['num_pages'] = video_data.paginator.num_pages
+    page_value['number'] = video_data.number
+    if page_value['has_previous']:
+        page_value['previous_page_number'] = video_data.previous_page_number()
+    if page_value['has_next']:
+        page_value['next_page_number'] = video_data.next_page_number()
+            
     video_list = []
     category_list = []
-    for i in videos:
+    for i in video_data:
         video_list.append({
                     'id': i.id,
                     'content_name': i.content_name,
@@ -410,9 +682,10 @@ def admin_youtube(request):
                     'category_name': i.category_name,
                 })
     data = video_list
-#        for i in videos.data:
-            
-    context = {'youtube':'active', 'data':data, 'message': message, 'category':category_list}
+    
+    context = {'youtube':'active', 'data':data, 
+               'message': message, 'category':category_list,
+               'object_list':page_value}
     return render(request, 'youtube.html', context)
 
 @login_required
