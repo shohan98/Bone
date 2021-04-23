@@ -1,5 +1,4 @@
-{% extends "dashboard_base.html" %} {% block content %}
-{% load static %}
+{% extends "dashboard_base.html" %} {% block content %} {% load static %}
 <!-- Begin Page Content -->
 <div class="container-fluid dashboard_item">
     <!-- Page Heading -->
@@ -11,37 +10,37 @@
         <div class="col-12">
             <h4 class="text-green">Video Category</h4>
         </div>
-        <div class="video-list mt-3">
-                <table class="table table-borderless">
-                    <tr>
-                        <th class="category_name">Category Name</th>
-                        <th class="total_video">Total Video</th>
-                        <th class="total_view">Total View</th>
-                        <th class="category_action">Action</th>
-                    </tr>
-                    <tbody>
-                        {% for i in data %}
+        <div class="video-list mt-3 w-100">
+            <table class="table table-borderless">
+                <tr>
+                    <th class="category_name">Category Name</th>
+                    <th class="total_video">Total Video</th>
+                    <th class="total_view">Total View</th>
+                    <th class="category_action">Action</th>
+                </tr>
+                <tbody>
+                    {% for i in data %}
 
-                        <tr>
-                            <td class="category_name">
-                                <p>{{i.category_name}}
-                                </p>
-                            </td>
-                            <td class="total_video">
-                                <p>{{i.total_video}}</p>
-                            </td>
-                            <td class="total_click">
-                                <p>{{i.total_click}}</p>
-                            </td>
-                            <td class="video_action">
-                                <a href="#" class="edit"><img src="{% static 'boneadmin/img/edit_icon.png' %}" alt=""></a>
-                                <a href="#" class="delete_video_btn" data-toggle="modal" data-target="#delete_video_modal"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                    <tr>
+                        <td class="category_name">
+                            <p>{{i.category_name}}
+                            </p>
+                        </td>
+                        <td class="total_video">
+                            <p>{{i.total_video}}</p>
+                        </td>
+                        <td class="total_click">
+                            <p>{{i.total_click}}</p>
+                        </td>
+                        <td class="video_action">
+                            <a href="#" class="edit"><img src="{% static 'boneadmin/img/edit_icon.png' %}" alt=""></a>
+                            <a href="#" class="delete_video_btn" data-toggle="modal" data-target="#delete_video_modal"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
         <div class="col-12">
             <h4 class="text-green mt-2 mb-4">Add New Category</h4>
             <form method="POST" action={% url 'boneadmin:video_category' %}>

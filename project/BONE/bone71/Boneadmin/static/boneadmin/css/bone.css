@@ -1952,7 +1952,6 @@ pre code {
 }
 
 .table-responsive {
-    display: block;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -11460,6 +11459,61 @@ a:focus {
 /*custom added css */
 
 
+/* file upload css custom  */
+
+.btn-tertiary {
+    color: #555;
+    padding: 0;
+    line-height: 40px;
+    width: 100%;
+    margin: auto;
+    display: block;
+    border: 1px solid #47B881;
+}
+
+.btn-tertiary:hover,
+.btn-tertiary:focus {
+    color: #888888;
+    border-color: #888888;
+}
+
+
+/* input file style */
+
+.input-file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.text-black {
+    color: #000;
+}
+
+.input-file+.js-labelFile {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.input-file+.js-labelFile .icon:before {
+    content: "";
+}
+
+.input-file+.js-labelFile.has-file .icon:before {
+    content: "";
+    color: #5aac7b;
+}
+
+
+/* file upload css custom  */
+
+
 /*custon switch button*/
 
 .switch {
@@ -12143,7 +12197,6 @@ body.sidebar-toggled footer.sticky-footer {
 
 .video-list tr,
 .banner_list tr {
-    display: inline-table;
     width: 100%;
     background-color: white;
     border-bottom: 28px solid #e4e4e5;
@@ -12239,18 +12292,19 @@ textarea {
 }
 
 .ad_image {
-    width: 130px;
+    /* width: 130px; */
 }
 
-.ad_image img,
-.ad_image video {
-    max-width: 100%;
+td img {
+    max-width: 120px;
+}
+
+.test {
+    /* width: 150px; */
 }
 
 .table tr,
-.table td {
-    padding: 0 auto;
-}
+.table td {}
 
 .all-modal .modal-header {
     border-bottom: none;

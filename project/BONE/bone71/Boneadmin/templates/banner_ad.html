@@ -16,35 +16,32 @@
                 </div>
             </h4>
             <div class="banner-list mt-3">
-                <table class="table table-borderless">
-                    <tr>
-                        <th class="ad_image">Thumbnail</th>
-                        <th class="ad_name">Ad Type</th>
-                        <th class="video_action">Total Watch</th>
-                        <th class="video_action">Total Click</th>
-                        <th class="video_action">Action</th>
-                    </tr>
+                <table class="table table-responsive table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col">Thumbnail</th>
+                            <th scope="col">Ad Type</th>
+                            <th scope="col">Total Watch</th>
+                            <th scope="col">Total Click</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         {% for i in data %}
                         <tr>
-                            <td class="ad_image">
-                                <div>
-                                    <img src="{{i.banner}}" alt="">
-                                </div>
+                            <td>
+                                <img class="test" src="{{i.banner}}" alt="">
                             </td>
-                            <td class="ad_name">
-                                <p class="mb-0">{{i.banner_name}}</p>
-                                {% if i.status %}
-                                    <p class="ad_position mb-0">{{i.position}}</p>
-                                {% endif %}
+                            <td>
+                                {{i.banner_name}} {% if i.status %} {{i.position}} {% endif %}
                             </td>
-                            <td class="ad_name">
-                                <p class="mb-0">{{i.total_watch}}</p>
+                            <td>
+                                {{i.total_watch}}
                             </td>
-                            <td class="ad_name">
-                                <p class="mb-0">{{i.total_click}}</p>
+                            <td>
+                                {{i.total_click}}
                             </td>
-                            <td class="video_action">
+                            <td>
                                 <a href="#" class="edit"><img src="{% static 'boneadmin/img/edit_icon.png' %}" alt=""></a>
                                 <a href="#" class="delete_video" data-toggle="modal" data-target="#delete_video_modal"><img src="{% static 'boneadmin/img/delete_icon.png' %}" alt=""></a>
                             </td>
@@ -72,14 +69,16 @@
                 <form method="POST" action={% url 'boneadmin:bannerad' %} enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
-                        <input type="hidden" class="form-control" id="username" aria-describedby="username" name="req_type" value="add_horizontalad" hidden>
+                        <input type="hidden" class="form-control" id="username" aria-describedby="username" name="type" value="add_horizontalad" hidden>
                     </div>
+
                     <div class="form-group">
-                        <label for="customFile">Image Upload</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile" name="banner">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
-                        </div>
+                        <p class="text-black">Image Upload</p>
+                        <input type="file" name="banner" id="file" class="input-file">
+                        <label for="file" class="btn btn-tertiary js-labelFile">
+                          <i class="icon fa fa-check"></i>
+                          <span class="js-fileName">Choose a file</span>
+                        </label>
                     </div>
                     <div class="form-group">
                         <label for="banner_name">Banner Name</label>

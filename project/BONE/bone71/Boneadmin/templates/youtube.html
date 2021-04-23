@@ -16,7 +16,7 @@
                     <a href="#" class="btn btn-default btn-filter"> <img class="mr-3" src="{% static 'boneadmin/img/filter_icon.png' %}" alt=""> Filter List</a>
                 </div>
             </h4>
-            <div class="video-list mt-3">
+            <div class="video-list mt-3 w-100">
                 <table class="table table-borderless">
                     <thead>
                         <tr>
@@ -72,7 +72,7 @@
                 <form method="POST" action={% url 'boneadmin:youtube' %} enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
-                        <input type="hidden" class="form-control" id="username" aria-describedby="username" name="req_type" value="add_video" hidden>
+                        <input type="hidden" class="form-control" id="username" aria-describedby="username" name="type" value="add_video" hidden>
                     </div>
                     <div class="form-group">
                         <label for="youtube_link">Drop Youtube Video Code</label>

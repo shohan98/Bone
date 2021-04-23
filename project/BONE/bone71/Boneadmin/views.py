@@ -272,6 +272,8 @@ def admin_bannerad(request):
                                 'content_name': i.content_name,
                                 'content_link': i.content_link,
                                 'category': i.category.category_name,
+                                'total_watch': i.total_watch,
+                                'total_click': i.total_click,
                                 'content_poster': settings.MEDIA_URL+str(i.content_poster)
                             })
                 page_value = {}
@@ -326,6 +328,8 @@ def admin_bannerad(request):
         hbanner_list.append({
                     'id': i.id,
                     'banner_name': i.banner_name,
+                    'total_watch': i.total_watch,
+                    'total_click': i.total_click,
                     'banner': settings.MEDIA_URL+str(i.banner),
                     'postion': i.position,
                     'status': i.status
