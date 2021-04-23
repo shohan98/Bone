@@ -237,7 +237,7 @@ def admin_bannerad(request):
     data=[]
     message=''
     if request.method == 'POST':
-        req_type = request.POST.get('req_type')
+        req_type = request.POST.get('type')
         if req_type=='add_horizontalad':
             banner_name = request.POST.get('name')
             target_link = request.POST.get('link')
@@ -265,7 +265,15 @@ def admin_bannerad(request):
                      
                     video_data=search_data
                 video_data =  page_data(request, video_data, 25)
-                
+                data = []
+                for i in video_data:
+                    data.append({
+                                'id': i.id,
+                                'content_name': i.content_name,
+                                'content_link': i.content_link,
+                                'category': i.category.category_name,
+                                'content_poster': settings.MEDIA_URL+str(i.content_poster)
+                            })
                 page_value = {}
                 page_value['has_previous'] = video_data.has_previous()
                 page_value['has_next'] = video_data.has_next()
@@ -336,7 +344,7 @@ def admin_motionad(request):
     data=[]
     message=''
     if request.method == 'POST':
-        req_type = request.POST.get('req_type')
+        req_type = request.POST.get('type')
         if req_type=='add_verticalad':
             banner_name = request.POST.get('name')
             target_link = request.POST.get('link')
@@ -363,7 +371,15 @@ def admin_motionad(request):
                     ).distinct()
                     video_data=search_data
                 video_data =  page_data(request, video_data, 25)
-                
+                data = []
+                for i in video_data:
+                    data.append({
+                                'id': i.id,
+                                'content_name': i.content_name,
+                                'content_link': i.content_link,
+                                'category': i.category.category_name,
+                                'content_poster': settings.MEDIA_URL+str(i.content_poster)
+                            })
                 page_value = {}
                 page_value['has_previous'] = video_data.has_previous()
                 page_value['has_next'] = video_data.has_next()
@@ -376,7 +392,7 @@ def admin_motionad(request):
     
                 context = {
                     'object_list':page_value,
-                    'video_data': video_data,
+                    'video_data': data,
                     'status': 200,
                     'video_search': key,
                     'category': category
@@ -435,7 +451,7 @@ def admin_videoad(request):
     data=[]
     message=''
     if request.method == 'POST':
-        req_type = request.POST.get('req_type')
+        req_type = request.POST.get('type')
         if req_type=='add_videoad':
             video_name = request.POST.get('name')
             file = request.FILES['video']
@@ -461,7 +477,15 @@ def admin_videoad(request):
                     ).distinct()
                     video_data=search_data
                 video_data =  page_data(request, video_data, 25)
-                
+                data = []
+                for i in video_data:
+                    data.append({
+                                'id': i.id,
+                                'content_name': i.content_name,
+                                'content_link': i.content_link,
+                                'category': i.category.category_name,
+                                'content_poster': settings.MEDIA_URL+str(i.content_poster)
+                            })
                 page_value = {}
                 page_value['has_previous'] = video_data.has_previous()
                 page_value['has_next'] = video_data.has_next()
@@ -474,7 +498,7 @@ def admin_videoad(request):
     
                 context = {
                     'object_list':page_value,
-                    'video_data': video_data,
+                    'video_data': data,
                     'status': 200,
                     'video_search': key,
                     'category': category
@@ -569,7 +593,7 @@ def admin_youtube(request):
     data=[]
     message=''
     if request.method == 'POST':
-        req_type = request.POST.get('req_type')
+        req_type = request.POST.get('type')
         if req_type=='add_video':
             content_name = request.POST.get('name')
             content_link = request.POST.get('link')
@@ -612,7 +636,15 @@ def admin_youtube(request):
                         ).distinct() 
                     video_data=search_data
                 video_data =  page_data(request, video_data, 25)
-                
+                data = []
+                for i in video_data:
+                    data.append({
+                                'id': i.id,
+                                'content_name': i.content_name,
+                                'content_link': i.content_link,
+                                'category': i.category.category_name,
+                                'content_poster': settings.MEDIA_URL+str(i.content_poster)
+                            })
                 page_value = {}
                 page_value['has_previous'] = video_data.has_previous()
                 page_value['has_next'] = video_data.has_next()
@@ -625,7 +657,7 @@ def admin_youtube(request):
     
                 context = {
                     'object_list':page_value,
-                    'video_data': video_data,
+                    'video_data': data,
                     'status': 200,
                     'video_search': key,
                     'category': category

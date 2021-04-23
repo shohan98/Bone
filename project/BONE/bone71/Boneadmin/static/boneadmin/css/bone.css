@@ -11632,6 +11632,10 @@ form.user .form-control-user {
     padding: 1.5rem 1rem;
 }
 
+#csrf-token {
+    display: none;
+}
+
 .btn-user-login {
     color: white;
     font-size: 0.8rem;
