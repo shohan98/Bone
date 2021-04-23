@@ -156,6 +156,7 @@
                 <div class="row">
                     <div class="container-xl categories_scroller_section">
                         <h4 class="text-white mb-4">Categories </h4>
+                        <input type="text" name="" id="csrf-token" value="{{ csrf_token }}">
                         <div class="category_slider">
                             <div class="slider_nav_category">
                                 <button class="customNextBtn"><i class="fas fa-chevron-right"></i></button>
@@ -164,7 +165,7 @@
                             <div id="categories_slider" class="category-slider owl-carousel owl-theme">
                                 {% for i in categories %}
                                 <div class="item">
-                                    <a href="#" class="movie_category" value="{{i.id}}">{{i.category_name}}</a>
+                                    <a href="javascript:void(0);" class="movie_category" value="{{i.id}}">{{i.category_name}} </a>
                                 </div>
                                 {% endfor %}
                             </div>

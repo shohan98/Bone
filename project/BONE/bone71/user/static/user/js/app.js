@@ -252,6 +252,35 @@ $(document).ready(function() {
     console.log()
     var leftHeight = $('.single-video-section').height();
     $('.recommended-videos-section').height(leftHeight);
+
+
+    // show category data 
+    let url = window.location.origin;
+    console.log(url)
+    $('.movie_category').click(function() {
+        console.log('clicked')
+        var catValue = parseInt($(this).attr('value'));
+        var csrf_token = $('#csrf-token').val();
+        console.log(catValue, csrf_token);
+        $.ajax({
+            type: "POST",
+            url: "/boneuser/api/categorycontent/",
+            contentType: "application/x-www-form-urlencoded",
+            data: {
+                category: catValue,
+                csrfmiddlewaretoken: csrf_token,
+            },
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(request, status, error) {
+                console.log(request, status, error)
+            }
+        });
+    });
+    // show category data 
+
+
 });
 
 

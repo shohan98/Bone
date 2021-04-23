@@ -52,21 +52,21 @@ class CategoryContent(ViewSet):
     def post(self, request):
         category = request.POST.get('category')
         video_list=[]   
-        try:
-            data = YoutubeContent.objects.get(category=category)
-            video_list=[]
-            for i in data:
-                video_list.append({
-                        'title': i.content_name,
-                        'id': i.id,
-                        'poster': settings.MEDIA_URL+str(i.content_poster),
-                        'link': i.content_link
-                    })
-                if len(video_list)>=12:
-                    break
-            status = 200
-        except:
-            status=404
+        # try:
+        data = YoutubeContent.objects.filter(category=category)
+        video_list=[]
+        for i in data:
+            video_list.append({
+                    'title': i.content_name,
+                    'id': i.id,
+                    'poster': settings.MEDIA_URL+str(i.content_poster),
+                    'link': i.content_link
+                })
+            if len(video_list)>=12:
+                break
+        status = 200
+        # except:
+            # status=404
         return Response({'video':video_list}, status)
     
     def list(self, request):
