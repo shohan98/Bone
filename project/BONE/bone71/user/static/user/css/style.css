@@ -556,12 +556,25 @@ button:focus {
 }
 
 .category_selected_movies {
+    display: none;
     background: #8ca3d04f;
     padding: 15px 15px;
 }
 
+.category_selected_movies .c_slider {
+    display: inline-block;
+}
+
+#csrf-token {
+    display: none;
+}
+
 .selected_close {
     float: right;
+}
+
+.selected_close:hover {
+    cursor: pointer;
 }
 
 .movie_play_icon {

@@ -255,13 +255,13 @@ $(document).ready(function() {
 
 
     // show category data 
-    let url = window.location.origin;
-    console.log(url)
     $('.movie_category').click(function() {
-        console.log('clicked')
+        var categoryname = $(this).text();
+        console.log(categoryname);
         var catValue = parseInt($(this).attr('value'));
         var csrf_token = $('#csrf-token').val();
-        console.log(catValue, csrf_token);
+        $('.category_movie_list').empty();
+        $('.selected_category').text(categoryname);
         $.ajax({
             type: "POST",
             url: "/boneuser/api/categorycontent/",
@@ -271,7 +271,30 @@ $(document).ready(function() {
                 csrfmiddlewaretoken: csrf_token,
             },
             success: function(response) {
-                console.log(response);
+                var categoryVideoList = response.video;
+                $('.category_selected_movies').show();
+                var html;
+                $.each(categoryVideoList, function(index, data) {
+                    html = `<div class="col-lg-3 col-md-4 col-sm-6 col-12 c_slider pl-0 mb-4">
+                    <div class="owl-item">
+                        <div class="item movie_poster" video-id=` + data.id + `>
+                            <img src=` + data.poster + ` alt="" class="item-img">
+                            <div class="right_icon">
+                                <a href="#">
+                                    <span class="favourite_movie"><img src="/static/user/image/favourite.png" alt=""></span>
+                                </a>
+                                <a href="#">
+                                    <span class="share_movie"><img src="/static/user/image/share.png" alt=""></span>
+                                </a>
+                            </div>
+                            <a href="#">
+                                <span class="movie_play_icon"><img src="/static/user/image/movie_play.png" alt=""></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>`;
+                    $('.category_movie_list').append(html)
+                });
             },
             error: function(request, status, error) {
                 console.log(request, status, error)
