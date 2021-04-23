@@ -17,6 +17,7 @@
 </head>
 
 <body>
+    <input type="text" name="" id="csrf-token" value="{{ csrf_token }}">
     <!-- top scrollbar section  -->
     <!-- <div class="container-fluid">
         <div class="row">
@@ -44,12 +45,15 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <div class="input-group pr-5">
-                            <input type="text" class="form-control" placeholder="Search here ..." aria-label="search" aria-describedby="button-addon2">
+                    <li class="nav-item mr-5">
+                        <div class="input-group mr-5">
+                            <input type="text" class="form-control search-movie-input" placeholder="Search here ..." aria-label="search" aria-describedby="button-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
                             </div>
+                            <span class="search-data">
+                                
+                            </span>
                         </div>
                     </li>
                     {% if login %}
@@ -156,7 +160,7 @@
                 <div class="row">
                     <div class="container-xl categories_scroller_section">
                         <h4 class="text-white mb-4">Categories </h4>
-                        <input type="text" name="" id="csrf-token" value="{{ csrf_token }}">
+
                         <div class="category_slider">
                             <div class="slider_nav_category">
                                 <button class="customNextBtn"><i class="fas fa-chevron-right"></i></button>
@@ -201,7 +205,7 @@
                             </div>
                             <div id="latest_slider" class="latest-video-slider owl-carousel owl-theme">
                                 {% for i in latest_video %}
-                                <div class="item movie_poster" video-id="{{i.id}}">
+                                <div class="item movie_poster" video-id="{{i.id}}" onclick="playMovie(this)">
                                     <img src="{{i.poster}}" alt="" class="item-img">
                                     <div class="right_icon">
                                         <a href="#">
@@ -233,7 +237,7 @@
                             </div>
                             <div id="movie_slider" class="movie_slider owl-carousel owl-theme">
                                 {% for i in most_watch %}
-                                <div class="item movie_poster" video-id="{{i.id}}">
+                                <div class="item movie_poster" video-id="{{i.id}}" onclick="playMovie(this)">
                                     <img src="{{i.poster}}" alt="" class="item-img">
                                     <div class="right_icon">
                                         <a href="#">

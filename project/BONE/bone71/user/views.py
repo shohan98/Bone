@@ -1,3 +1,5 @@
+import json
+from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -11,7 +13,8 @@ from rest_framework.viewsets import ViewSet, GenericViewSet
 from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
-
+from django.db.models import Q
+from django.core.paginator import Paginator
 from Boneadmin.models import User, YoutubeContent, ContentCategory
 from .models import BoneUser
 from .forms import UserSignUpForm
@@ -29,7 +32,16 @@ class test(ViewSet):
 def csrf_failure(request, reason=""):
     current_url = request.get_full_path()
     return redirect(current_url)
-
+    
+def page_data(request, data,per_page_value):
+    try:
+        paginator = Paginator(data, per_page_value)  # Show 25 contacts per page
+        page = request.GET.get('page')
+        if not page:
+            page = request.POST.get('page')    
+        return paginator.get_page(page)
+    except:
+        return data
 
 class Signup(ViewSet):
     def post(self, request):
@@ -75,6 +87,70 @@ class CategoryContent(ViewSet):
 def user_index(request):
     message=''
     if request.method == 'POST':
+        if request.POST.get('type')=='search':
+            key = request.POST.get('key')
+            category = request.POST.get('category')
+            # try:
+            if category:
+                video_data = YoutubeContent.objects.get_queryset().filter(
+                        category=category).reverse()
+            else:
+                video_data = YoutubeContent.objects.get_queryset().order_by('created_at').reverse()
+            if key:
+                search_data = video_data.filter(
+                    Q(content_name__icontains=key)
+                    
+                ).distinct()
+                if len(search_data)==0:
+                    search_data = video_data.filter(
+                        Q(content_description__icontains=key)
+                        
+                    ).distinct() 
+                video_data=search_data
+            video_data =  page_data(request, video_data, 25)
+            data = []
+            for i in video_data:
+                data.append({
+                        'title': i.content_name,
+                        'id': i.id,
+                        'poster': settings.MEDIA_URL+str(i.content_poster),
+                        'link': i.content_link
+                    })
+                if len(data)>=10:
+                    break
+            page_value = {}
+            page_value['has_previous'] = video_data.has_previous()
+            page_value['has_next'] = video_data.has_next()
+            page_value['num_pages'] = video_data.paginator.num_pages
+            page_value['number'] = video_data.number
+            if page_value['has_previous']:
+                page_value['previous_page_number'] = video_data.previous_page_number()
+            if page_value['has_next']:
+                page_value['next_page_number'] = video_data.next_page_number()
+
+            context = {
+                'object_list':page_value,
+                'video_data': data,
+                'status': 200,
+                'video_search': key,
+                'category': category
+            }
+            return HttpResponse(
+                    json.dumps(context),
+                    content_type="application/json"
+                )
+            # except:
+            #     context = {
+            #         'object_list':'',
+            #         'video_data': '',
+            #         'status': 404,
+            #         'video_search': key,
+            #         'category': category
+            #     }
+            #     return HttpResponse(
+            #             json.dumps(context),
+            #             content_type="application/json"
+            #         )
         if request.POST.get('type')=='login':
 #            form = AuthenticationForm(data=request.POST)
 #            if form.is_valid():
@@ -152,61 +228,7 @@ def user_index(request):
 def user_video_player(request, pk):
     if request.method == 'POST':
         req_type = request.POST.get('req_type')
-        if req_type=='search':
-            key = request.POST.get('key')
-            category = request.POST.get('category')
-            try:
-                if category:
-                    video_data = YoutubeContent.objects.get_queryset().filter(
-                            category=category).reverse()
-                else:
-                    video_data = YoutubeContent.objects.get_queryset().order_by('created_at').reverse()
-                if key:
-                    search_data = video_data.filter(
-                        Q(content_name__icontains=key)
-                        
-                    ).distinct()
-                    if len(search_data)==0:
-                        search_data = video_data.filter(
-                            Q(content_description__icontains=key)
-                            
-                        ).distinct() 
-                    video_data=search_data
-                video_data =  page_data(request, video_data, 25)
-                
-                page_value = {}
-                page_value['has_previous'] = video_data.has_previous()
-                page_value['has_next'] = video_data.has_next()
-                page_value['num_pages'] = video_data.paginator.num_pages
-                page_value['number'] = video_data.number
-                if page_value['has_previous']:
-                    page_value['previous_page_number'] = video_data.previous_page_number()
-                if page_value['has_next']:
-                    page_value['next_page_number'] = video_data.next_page_number()
-    
-                context = {
-                    'object_list':page_value,
-                    'video_data': video_data,
-                    'status': 200,
-                    'video_search': key,
-                    'category': category
-                }
-                return HttpResponse(
-                        json.dumps(context),
-                        content_type="application/json"
-                    )
-            except:
-                context = {
-                    'object_list':'',
-                    'video_data': '',
-                    'status': 404,
-                    'video_search': key,
-                    'category': category
-                }
-                return HttpResponse(
-                        json.dumps(context),
-                        content_type="application/json"
-                    )
+        
     try:
         # main video
         video = YoutubeContent.objects.get(id=pk)

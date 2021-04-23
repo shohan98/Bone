@@ -199,20 +199,16 @@ $(document).ready(function() {
     });
 
     // video and ad render to another page 
-    $('.movie_poster,.vi-movie-play').click(function() {
-        var id = $(this).attr('video-id');
-        var url = window.location.origin;
-        window.location.href = url + "/video" + '/' + id;
-    });
+
+
+
     // video and ad render to another page 
 
     var video = $('#video').length;
     if (video) {
         // document.getElementById('video').removeAttribute('muted');
         // document.getElementById('video').play();
-        console.log('got video', video)
         document.getElementById('video').addEventListener('ended', function(e) {
-            console.log('ended')
             var src = $('.main-video-section iframe').attr('src')
             $('.ad-video-section').slideToggle();
             $('.main-video-section').slideToggle();
@@ -220,11 +216,9 @@ $(document).ready(function() {
         });
     }
     $('.signup-form').submit(function() {
-        console.log('submit');
         var password = $('#reg-password').val();
         var confirmPass = $('#confirm-password').val();
         if (password.length < 8) {
-            console.log(password.length)
             $('.password-alert').text('Check password requirments');
             $('.password-alert').show();
             setTimeout(function() {
@@ -233,8 +227,6 @@ $(document).ready(function() {
             return false;
         }
         if (password != confirmPass) {
-            console.log(password, confirmPass);
-            console.log('password not matched');
             $('.password-alert').text("Password didn't matched");
             $('.password-alert').show();
             setTimeout(function() {
@@ -245,21 +237,17 @@ $(document).ready(function() {
     });
     $('.selected_close').click(function() {
         $(this).closest('.category_selected_movies').hide();
-        // $(this).closest('.c_slider').remove();
-        // console.log($(this).closest('.category_selected_movies .c_slider'))
+
     });
     showMore();
-    console.log()
     var leftHeight = $('.single-video-section').height();
     $('.recommended-videos-section').height(leftHeight);
 
-
+    let csrf_token = $('#csrf-token').val();
     // show category data 
     $('.movie_category').click(function() {
-        var categoryname = $(this).text();
-        console.log(categoryname);
+        var categoryname = $(this).text().toUpperCase();
         var catValue = parseInt($(this).attr('value'));
-        var csrf_token = $('#csrf-token').val();
         $('.category_movie_list').empty();
         $('.selected_category').text(categoryname);
         $.ajax({
@@ -277,7 +265,7 @@ $(document).ready(function() {
                 $.each(categoryVideoList, function(index, data) {
                     html = `<div class="col-lg-3 col-md-4 col-sm-6 col-12 c_slider pl-0 mb-4">
                     <div class="owl-item">
-                        <div class="item movie_poster" video-id=` + data.id + `>
+                        <div class="item movie_poster" video-id=` + data.id + ` onclick="playMovie(this)">
                             <img src=` + data.poster + ` alt="" class="item-img">
                             <div class="right_icon">
                                 <a href="#">
@@ -287,7 +275,7 @@ $(document).ready(function() {
                                     <span class="share_movie"><img src="/static/user/image/share.png" alt=""></span>
                                 </a>
                             </div>
-                            <a href="#">
+                            <a href="javascript:void(0);">
                                 <span class="movie_play_icon"><img src="/static/user/image/movie_play.png" alt=""></span>
                             </a>
                         </div>
@@ -304,6 +292,40 @@ $(document).ready(function() {
     // show category data 
 
 
+    $('.search-movie-input').keyup(function() {
+        var searchValue = this.value;
+        if (searchValue.length > 0) {
+            $('.search-data').slideToggle()
+        } else {
+            $('.search-data').slideToggle()
+        }
+        var url = window.location.origin;
+        console.log(searchValue);
+        $('.search-data').empty();
+        $.ajax({
+            type: "POST",
+            url: url,
+            contentType: "application/x-www-form-urlencoded",
+            data: {
+                type: "search",
+                key: searchValue,
+                csrfmiddlewaretoken: csrf_token,
+            },
+            success: function(response) {
+                var searchvideoLlist = response.video_data;
+                console.log(searchvideoLlist);
+                var html;
+                $.each(searchvideoLlist, function(index, data) {
+                    console.log(data)
+                    html = `<a href="javascript:void(0);" video-id=` + data.id + ` onclick="playMovie(this)"><img src=` + data.poster + ` alt=""><span>` + data.title + `</span></a>`;
+                    $('.search-data').append(html)
+                });
+            },
+            error: function(request, status, error) {
+                console.log(request, status, error)
+            }
+        });
+    });
 });
 
 
@@ -339,4 +361,10 @@ function showMore() {
         $(this).prev().toggle();
         return false;
     });
+}
+
+function playMovie(e) {
+    var id = e.getAttribute('video-id');
+    var url = window.location.origin;
+    window.location.href = url + "/video" + '/' + id;
 }

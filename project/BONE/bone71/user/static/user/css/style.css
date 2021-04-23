@@ -577,6 +577,59 @@ button:focus {
     cursor: pointer;
 }
 
+.search-data {
+    display: none;
+    padding: 5px 15px;
+    width: 100%;
+    border: 1px solid #d2d2d2;
+    position: absolute;
+    top: 40px;
+    z-index: 2;
+    background: white;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 100%;
+    max-height: 360px;
+    overflow: auto;
+}
+
+.search-data a {
+    display: block;
+    color: #000;
+    font-size: 15px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.search-data a:hover {
+    color: #3D6CC9;
+}
+
+.search-movie-input {
+    width: 500px;
+}
+
+.search-movie-input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.video-item:hover {
+    cursor: pointer;
+}
+
+.search-data img {
+    width: 100px;
+    margin-right: 10px;
+    height: 60px;
+    display: inline-block;
+}
+
+.search-data span {
+    width: calc(100% - 110px);
+    display: inline-block;
+}
+
 .movie_play_icon {
     width: 30px;
     position: absolute;
@@ -676,6 +729,9 @@ button:focus {
 }
 
 @media (max-width: 767.98px) {
+    .search-movie-input {
+        width: auto;
+    }
     .image_content {
         width: 100%;
     }
