@@ -292,7 +292,6 @@ button:focus {
     float: left;
     left: -10vw;
     width: 10vw;
-    top: 500px;
 }
 
 .left-ad-section img {
@@ -304,7 +303,6 @@ button:focus {
     float: right;
     right: -10vw;
     width: 10vw;
-    top: 500px;
 }
 
 .right-ad-section img {
